@@ -1,1 +1,10 @@
 .idea/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+.gitattributes
+
+
+
+
+# Ignore Gradle build output directory
+build
