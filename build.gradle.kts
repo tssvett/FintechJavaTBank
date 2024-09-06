@@ -32,6 +32,10 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.12")
 
     implementation("ch.qos.logback:logback-core:1.4.14")
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
