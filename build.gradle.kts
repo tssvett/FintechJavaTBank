@@ -18,6 +18,13 @@ repositories {
 dependencies {
     testImplementation(libs.junit.jupiter)
 
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.4")
+
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     implementation(libs.guava)
@@ -33,8 +40,12 @@ dependencies {
 
     implementation("ch.qos.logback:logback-core:1.4.14")
 
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation("org.springframework.boot:spring-boot-starter-web:3.3.4")
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-webflux
+    implementation("org.springframework:spring-webflux:6.1.13")
+
 
 }
 
