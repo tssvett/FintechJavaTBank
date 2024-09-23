@@ -3,6 +3,7 @@
 .gradle/
 .gitattributes
 
+/out
 
 
 
