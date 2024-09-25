@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.exception.CategoryNotExistException;
+import org.example.task5.logtime.annotation.LogExecutionTime;
 import org.example.task5.model.Category;
 import org.example.task5.repository.InMemoryRepository;
 import org.example.task5.service.KudaGoService;
@@ -17,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@LogExecutionTime
 public class CategoryService implements KudaGoService<Integer, Category, CategoryCreateDto, CategoryUpdateDto> {
     private final InMemoryRepository<Integer, Category> inMemoryRepository;
 

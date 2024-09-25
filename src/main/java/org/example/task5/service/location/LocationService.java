@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.exception.LocationNotExistException;
+import org.example.task5.logtime.annotation.LogExecutionTime;
 import org.example.task5.model.Location;
 import org.example.task5.repository.InMemoryRepository;
 import org.example.task5.service.KudaGoService;
@@ -16,6 +17,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@LogExecutionTime
 public class LocationService implements KudaGoService<String, Location, LocationCreateDto, LocationUpdateDto> {
     private final InMemoryRepository<String, Location> inMemoryRepository;
 

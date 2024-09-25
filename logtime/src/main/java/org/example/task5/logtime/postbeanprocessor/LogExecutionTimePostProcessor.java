@@ -8,18 +8,30 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class LogExecutionTimePostProcessor implements BeanPostProcessor {
+    private Map<String, Class> map = new HashMap<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
 
         if (shouldProxy(beanClass)) {
-            return createProxy(bean);
+            map.put(beanName, beanClass);
         }
 
+        return bean;
+    }
+
+    @Override
+    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        Class<?> beanClass = map.get(beanName);
+        if (beanClass != null) {
+            return createProxy(bean);
+        }
         return bean;
     }
 
