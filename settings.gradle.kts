@@ -12,3 +12,4 @@ plugins {
 
 rootProject.name = "FintechJavaTBank"
 include("src")
+include("logtime")

@@ -30,7 +30,8 @@ public class KudaGoServiceClient {
                     log.error("Error response: {}", clientResponse.statusCode());
                     return Mono.error(new KudaGoException("Failed to fetch categories: " + clientResponse.statusCode()));
                 })
-                .bodyToMono(new ParameterizedTypeReference<List<Category>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<Category>>() {
+                })
                 .doOnNext(categories -> log.info("Successfully fetched {} categories", categories.size()))
                 .doOnError(e -> log.error("Error fetching categories: {}", e.getMessage()))
                 .block();
@@ -45,7 +46,8 @@ public class KudaGoServiceClient {
                     log.error("Error response: {}", clientResponse.statusCode());
                     return Mono.error(new KudaGoException("Failed to fetch locations: " + clientResponse.statusCode()));
                 })
-                .bodyToMono(new ParameterizedTypeReference<List<Location>>() {})
+                .bodyToMono(new ParameterizedTypeReference<List<Location>>() {
+                })
                 .doOnNext(locations -> log.info("Successfully fetched {} locations", locations.size()))
                 .doOnError(e -> log.error("Error fetching locations: {}", e.getMessage()))
                 .block();

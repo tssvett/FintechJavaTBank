@@ -1,4 +1,7 @@
 package org.example.task5.dto.location;
 
-public class LocationUpdateDto {
+public record LocationUpdateDto(
+        String slug,
+        String name
+) {
 }

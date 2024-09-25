@@ -15,7 +15,10 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies {
+    implementation(project(":logtime"))
+
     testImplementation(libs.junit.jupiter)
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
@@ -64,4 +67,8 @@ application {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-parameters")
 }

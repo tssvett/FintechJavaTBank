@@ -1,11 +1,12 @@
-package org.example.task5.controller;
+package org.example.task5.controller.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task5.controller.Controller;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.model.Category;
-import org.example.task5.service.CategoryService;
+import org.example.task5.service.KudaGoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,36 +24,46 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/places/categories")
 @RequiredArgsConstructor
-public class CategoryController {
-    private final CategoryService categoryService;
+public class CategoryController implements Controller<Integer, Category, CategoryCreateDto, CategoryUpdateDto> {
+    private final KudaGoService<Integer, Category, CategoryCreateDto, CategoryUpdateDto> categoryService;
+
+    @Override
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Category> getCategories() {
-        return categoryService.getAllCategories();
+    public List<Category> getAll() {
+        return categoryService.getAll();
     }
+
+    @Override
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Category getCategoryById(@PathVariable int id) {
-        return categoryService.getCategoryById(id);
+    public Category getById(@PathVariable("id") Integer id) {
+        return categoryService.getById(id);
     }
+
+    @Override
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Category createCategory(@RequestBody CategoryCreateDto categoryCreateDto) {
-        return categoryService.createCategory(categoryCreateDto);
+    public Category create(@RequestBody CategoryCreateDto categoryCreateDto) {
+        return categoryService.create(categoryCreateDto);
     }
+
+    @Override
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Category updateCategory(@PathVariable int id, @RequestBody CategoryUpdateDto categoryUpdateDto) {
-        return categoryService.updateCategory(id, categoryUpdateDto);
+    public Category update(@PathVariable("id") Integer id, @RequestBody CategoryUpdateDto categoryUpdateDto) {
+        return categoryService.update(id, categoryUpdateDto);
     }
+
+    @Override
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCategory(@PathVariable int id) {
-        categoryService.deleteCategory(id);
+    public void delete(@PathVariable("id") Integer id) {
+        categoryService.delete(id);
     }
 }

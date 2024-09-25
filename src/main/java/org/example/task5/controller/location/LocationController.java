@@ -1,11 +1,12 @@
-package org.example.task5.controller;
+package org.example.task5.controller.location;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task5.controller.Controller;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.model.Location;
-import org.example.task5.service.LocationService;
+import org.example.task5.service.KudaGoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,40 +20,52 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 @Slf4j
 @RestController
 @RequestMapping("api/v1/locations")
 @RequiredArgsConstructor
-public class LocationController {
-    private final LocationService locationService;
+public class LocationController implements Controller<String, Location, LocationCreateDto, LocationUpdateDto> {
+    private final KudaGoService<String, Location, LocationCreateDto, LocationUpdateDto> locationService;
+
+    @Override
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Location> getLocations() {
-        return locationService.getAllLocations();
+    public List<Location> getAll() {
+        return locationService.getAll();
     }
 
-    @GetMapping("/{id}")
+    @Override
+
+    @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Location getLocationById(@PathVariable int id) {
-        return locationService.getLocationById(id);
+    public Location getById(@PathVariable("id") String id) {
+        return locationService.getById(id);
     }
+
+    @Override
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Location createLocation(@RequestBody LocationCreateDto location) {
-        return locationService.createLocation(location);
+    public Location create(@RequestBody LocationCreateDto location) {
+        return locationService.create(location);
     }
 
-    @PutMapping("/{id}")
+
+    @Override
+
+    @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Location updateLocation(@PathVariable int id, @RequestBody LocationUpdateDto location) {
-        return locationService.updateLocation(id, location);
+    public Location update(@PathVariable("id") String id, @RequestBody LocationUpdateDto location) {
+        return locationService.update(id, location);
     }
 
-    @DeleteMapping("/{id}")
+    @Override
+
+    @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteLocation(@PathVariable int id) {
-        locationService.deleteLocation(id);
+    public void delete(@PathVariable("id") String id) {
+        locationService.delete(id);
     }
 }

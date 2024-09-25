@@ -1,4 +1,7 @@
 package org.example.task5.dto.category;
 
-public class CategoryUpdateDto {
+public record CategoryUpdateDto(
+        String slug,
+        String name
+) {
 }
