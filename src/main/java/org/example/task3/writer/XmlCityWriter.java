@@ -1,8 +1,8 @@
-package org.example.writer;
+package org.example.task3.writer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
-import org.example.model.City;
+import org.example.task3.model.City;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,7 +1,8 @@
-package org.example.list.impl;
+package org.example.task3.list.impl;
 
 
-import org.example.list.CustomLinkedList;
+
+import org.example.task3.list.CustomLinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
