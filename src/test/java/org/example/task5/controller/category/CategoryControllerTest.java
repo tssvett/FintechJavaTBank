@@ -7,9 +7,10 @@ import org.example.task5.model.Category;
 import org.example.task5.service.KudaGoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +22,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class CategoryControllerTest {
 
     @Mock
@@ -31,18 +34,29 @@ class CategoryControllerTest {
     @InjectMocks
     private CategoryController categoryController;
 
+
+    Category category1;
+    CategoryCreateDto categoryCreateDto1;
+    CategoryUpdateDto categoryUpdateDto1;
+    Category category2;
+    CategoryCreateDto categoryCreateDto2;
+    CategoryUpdateDto categoryUpdateDto2;
+
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    void before() {
+        category1 = new Category(1, "category-1", "Category 1");
+        categoryCreateDto1 = new CategoryCreateDto("category-1", "Category 1");
+        categoryUpdateDto1 = new CategoryUpdateDto("updatedCategory-1", "updatedCategory 1");
+
+        category2 = new Category(2, "category-2", "Category 2");
+        categoryCreateDto2 = new CategoryCreateDto("category-2", "Category 2");
+        categoryUpdateDto2 = new CategoryUpdateDto("updatedCategory-2", "updatedCategory 2");
     }
 
     @Test
-    void getAll() {
+    void getAll_notEmptyDatasource_shouldReturnNotEmptyList() {
         // Arrange
-        Category category1 = new Category(1, "category-1", "Category 1");
-        Category category2 = new Category(2, "category-2", "Category 2");
         List<Category> categories = Arrays.asList(category1, category2);
-
         when(categoryService.getAll()).thenReturn(categories);
 
         // Act
@@ -55,31 +69,43 @@ class CategoryControllerTest {
         verify(categoryService).getAll();
     }
 
-    @Test
-    void getById_existingId() {
-        // Arrange
-        Integer id = 1;
-        Category category = new Category(id, "category-1", "Category 1");
 
-        when(categoryService.getById(id)).thenReturn(category);
+    @Test
+    void getAll_emptyDatasource_shouldReturnEmptyList() {
+        // Arrange
+        when(categoryService.getAll()).thenReturn(List.of());
+
+        // Act
+        List<Category> result = categoryController.getAll();
+
+        // Assert
+        assertEquals(0, result.size());
+        verify(categoryService).getAll();
+    }
+
+    @Test
+    void getById_existingId_shouldReturnCategory() {
+        // Arrange
+        int id = 1;
+        when(categoryService.getById(id)).thenReturn(category1);
 
         // Act
         Category result = categoryController.getById(id);
 
         // Assert
-        assertEquals(category, result);
+        assertEquals(category1, result);
         verify(categoryService).getById(id);
     }
 
     @Test
-    void getById_nonExistingId() {
+    void getById_notExistingId_shouldThrowException() {
         // Arrange
         Integer id = 99;
 
         when(categoryService.getById(id)).thenThrow(new CategoryNotExistException("Category with id " + id + " does not exist"));
 
         // Act & Assert
-        CategoryNotExistException exception = assertThrows(CategoryNotExistException.class, () -> {
+        var exception = assertThrows(CategoryNotExistException.class, () -> {
             categoryController.getById(id);
         });
 
@@ -88,34 +114,31 @@ class CategoryControllerTest {
     }
 
     @Test
-    void create() {
+    void create_shouldReturnCreatedCategory() {
         // Arrange
-        CategoryCreateDto dto = new CategoryCreateDto("category-1", "Category 1");
-        Category createdCategory = new Category(1, dto.slug(), dto.name());
-
-        when(categoryService.create(dto)).thenReturn(createdCategory);
+        when(categoryService.create(categoryCreateDto1)).thenReturn(category1);
 
         // Act
-        Category result = categoryController.create(dto);
+        Category result = categoryController.create(categoryCreateDto1);
 
         // Assert
-        assertEquals(createdCategory, result);
-        verify(categoryService).create(dto);
+        assertEquals(categoryCreateDto1.name(), result.name());
+        assertEquals(categoryCreateDto1.slug(), result.slug());
+        verify(categoryService).create(categoryCreateDto1);
     }
 
     @Test
     void update_existingId() {
         // Arrange
         Integer id = 1;
-        CategoryUpdateDto dto = new CategoryUpdateDto("slug", "Updated Category");
 
-        when(categoryService.update(eq(id), any())).thenReturn(new Category(id, "category-1", dto.name()));
+        when(categoryService.update(id, categoryUpdateDto1)).thenReturn(new Category(id, categoryUpdateDto1.slug(), categoryUpdateDto1.name()));
 
         // Act
-        Category result = categoryController.update(id, dto);
+        Category result = categoryController.update(id, categoryUpdateDto1);
 
         // Assert
-        assertEquals(dto.name(), result.name());
+        assertEquals(categoryUpdateDto1.name(), result.name());
         verify(categoryService).update(eq(id), any());
     }
 
@@ -128,11 +151,26 @@ class CategoryControllerTest {
 
         // Act & Assert
         CategoryNotExistException exception = assertThrows(CategoryNotExistException.class, () -> {
-            categoryController.update(id, new CategoryUpdateDto("slug", "Some Name"));
+            categoryController.update(id, categoryUpdateDto1);
         });
 
         assertEquals("Category with id 99 does not exist", exception.getMessage());
         verify(categoryService).update(eq(id), any());
+    }
+
+    @Test
+    void delete_existingId() {
+        // Arrange
+        Integer id = 1;
+
+        when(categoryService.delete(id)).thenReturn(category1);
+
+        // Act
+        categoryController.delete(id);
+
+        // Assert
+        verify(categoryService).delete(id);
+        verifyNoMoreInteractions(categoryService);
     }
 
 
