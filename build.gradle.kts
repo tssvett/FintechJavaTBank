@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    jacoco
 }
 
 repositories {
@@ -59,9 +60,27 @@ java {
     }
 }
 
+
 application {
     // Define the main class for the application.
     mainClass = "org.example.App"
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-parameters")
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+    reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
 }
 
 tasks.named<Test>("test") {
@@ -69,6 +88,13 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.compilerArgs.add("-parameters")
+tasks.withType<JacocoReport> {
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("org/example/task3/**")
+            exclude("org/example/task5/dto/**")
+        }
+    )
 }
+
+
