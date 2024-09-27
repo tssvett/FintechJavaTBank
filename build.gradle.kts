@@ -61,10 +61,7 @@ java {
 }
 
 
-application {
-    // Define the main class for the application.
-    mainClass = "org.example.App"
-}
+
 
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
@@ -72,7 +69,7 @@ tasks.withType<JavaCompile>().configureEach {
 
 jacoco {
     toolVersion = "0.8.12"
-    reportsDirectory = layout.buildDirectory.dir("customJacocoReportDir")
+    reportsDirectory = layout.buildDirectory.dir("jacocoReports")
 }
 
 tasks.test {
