@@ -28,6 +28,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.4")
 
+    testImplementation("org.testcontainers:junit-jupiter:1.17.3")
+
+    testImplementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
