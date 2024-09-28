@@ -30,7 +30,7 @@ dependencies {
 
     testImplementation("org.testcontainers:junit-jupiter:1.17.3")
 
-    testImplementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
+    testImplementation("org.wiremock.integrations.testcontainers:wiremock-testcontainers-module:1.0-alpha-14")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
