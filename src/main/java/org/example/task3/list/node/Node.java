@@ -1,4 +1,4 @@
-package org.example.list.node;
+package org.example.task3.list.node;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

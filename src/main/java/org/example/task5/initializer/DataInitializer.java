@@ -2,6 +2,7 @@ package org.example.task5.initializer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task5.exception.DataInitializationException;
 import org.example.task5.integration.KudaGoServiceClient;
 import org.example.task5.logtime.annotation.LogExecutionTime;
 import org.example.task5.model.Category;
@@ -37,6 +38,7 @@ public class DataInitializer implements Initializer {
             log.info("Locations successfully initialized");
         } catch (Exception e) {
             log.error("Error while initializing data: {}", e.getMessage());
+            throw new DataInitializationException(e.getMessage());
         }
     }
 }

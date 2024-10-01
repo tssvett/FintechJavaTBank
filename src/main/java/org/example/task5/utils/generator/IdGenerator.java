@@ -1,12 +1,17 @@
 package org.example.task5.utils.generator;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
+@RequiredArgsConstructor
 public class IdGenerator {
     private static final int MAX_ID = 100000;
-    private static final Random random = new Random();
+    private final Random random;
 
-    public static int generateId() {
+    public int generateId() {
         return random.nextInt(MAX_ID);
     }
 }

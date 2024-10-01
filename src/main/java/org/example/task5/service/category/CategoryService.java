@@ -21,6 +21,7 @@ import java.util.List;
 @LogExecutionTime
 public class CategoryService implements KudaGoService<Integer, Category, CategoryCreateDto, CategoryUpdateDto> {
     private final InMemoryRepository<Integer, Category> inMemoryRepository;
+    private final IdGenerator idGenerator;
 
     @Override
     public List<Category> getAll() {
@@ -35,7 +36,7 @@ public class CategoryService implements KudaGoService<Integer, Category, Categor
 
     @Override
     public Category create(CategoryCreateDto categoryCreateDto) {
-        int randomId = IdGenerator.generateId();
+        int randomId = idGenerator.generateId();
         return inMemoryRepository.save(randomId, Mapper.toCategory(randomId, categoryCreateDto));
     }
 

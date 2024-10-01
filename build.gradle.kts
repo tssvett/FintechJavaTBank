@@ -8,6 +8,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    jacoco
 }
 
 repositories {
@@ -27,6 +28,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.3.4")
 
+    testImplementation("org.testcontainers:junit-jupiter:1.17.3")
+
+    testImplementation("org.wiremock.integrations.testcontainers:wiremock-testcontainers-module:1.0-alpha-14")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
@@ -59,9 +63,24 @@ java {
     }
 }
 
-application {
-    // Define the main class for the application.
-    mainClass = "org.example.App"
+
+
+
+tasks.withType<JavaCompile>().configureEach {
+    options.compilerArgs.add("-parameters")
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+    reportsDirectory = layout.buildDirectory.dir("jacocoReports")
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
 }
 
 tasks.named<Test>("test") {
@@ -69,6 +88,16 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
+tasks.withType<JacocoReport> {
+    classDirectories.setFrom(
+        sourceSets.main.get().output.asFileTree.matching {
+            exclude("org/example/task3/**")
+            exclude("org/example/task5/dto/**")
+        }
+    )
+}
+
 tasks.withType<JavaCompile>().configureEach {
     options.compilerArgs.add("-parameters")
 }
+

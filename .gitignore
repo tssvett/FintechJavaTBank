@@ -3,7 +3,7 @@
 .gradle/
 .gitattributes
 
-/out
+out/
 /logtime/out
 
 

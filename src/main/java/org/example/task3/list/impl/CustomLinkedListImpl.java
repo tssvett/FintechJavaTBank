@@ -1,6 +1,7 @@
-package org.example.list.impl;
+package org.example.task3.list.impl;
 
-import org.example.list.CustomLinkedList;
+
+import org.example.task3.list.CustomLinkedList;
 
 public class CustomLinkedListImpl<T> implements CustomLinkedList<T> {
     private Node<T> head;
