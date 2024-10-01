@@ -1,5 +1,6 @@
 package org.example.task5.controller.category;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.exception.CategoryNotExistException;
@@ -7,186 +8,168 @@ import org.example.task5.model.Category;
 import org.example.task5.service.KudaGoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest(CategoryController.class)
 class CategoryControllerTest {
 
-    @Mock
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @MockBean
     private KudaGoService<Integer, Category, CategoryCreateDto, CategoryUpdateDto> categoryService;
 
-    @InjectMocks
-    private CategoryController categoryController;
-
-
-    Category category1;
-    CategoryCreateDto categoryCreateDto1;
-    CategoryUpdateDto categoryUpdateDto1;
-    Category category2;
-    CategoryCreateDto categoryCreateDto2;
-    CategoryUpdateDto categoryUpdateDto2;
+    private Category category;
 
     @BeforeEach
-    void before() {
-        category1 = new Category(1, "category-1", "Category 1");
-        categoryCreateDto1 = new CategoryCreateDto("category-1", "Category 1");
-        categoryUpdateDto1 = new CategoryUpdateDto("updatedCategory-1", "updatedCategory 1");
-
-        category2 = new Category(2, "category-2", "Category 2");
-        categoryCreateDto2 = new CategoryCreateDto("category-2", "Category 2");
-        categoryUpdateDto2 = new CategoryUpdateDto("updatedCategory-2", "updatedCategory 2");
+    void setUp() {
+        category = new Category(1, "test-category", "Test Category");
     }
 
     @Test
-    void getAll_notEmptyDatasource_shouldReturnNotEmptyList() {
-        // Arrange
-        List<Category> categories = Arrays.asList(category1, category2);
-        when(categoryService.getAll()).thenReturn(categories);
+    void getAllCategories_shouldReturnAllCategories() throws Exception {
+        when(categoryService.getAll()).thenReturn(List.of(category));
 
-        // Act
-        List<Category> result = categoryController.getAll();
+        mockMvc.perform(get("/api/v1/places/categories"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].id").value(category.id()))
+                .andExpect(jsonPath("$[0].slug").value(category.slug()))
+                .andExpect(jsonPath("$[0].name").value(category.name()));
 
-        // Assert
-        assertEquals(2, result.size());
-        assertTrue(result.contains(category1));
-        assertTrue(result.contains(category2));
-        verify(categoryService).getAll();
-    }
-
-
-    @Test
-    void getAll_emptyDatasource_shouldReturnEmptyList() {
-        // Arrange
-        when(categoryService.getAll()).thenReturn(List.of());
-
-        // Act
-        List<Category> result = categoryController.getAll();
-
-        // Assert
-        assertEquals(0, result.size());
         verify(categoryService).getAll();
     }
 
     @Test
-    void getById_existingId_shouldReturnCategory() {
-        // Arrange
+    void getCategoryById_shouldReturnCategory_whenCategoryExists() throws Exception {
         int id = 1;
-        when(categoryService.getById(id)).thenReturn(category1);
+        when(categoryService.getById(id)).thenReturn(category);
 
-        // Act
-        Category result = categoryController.getById(id);
+        mockMvc.perform(get("/api/v1/places/categories/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(category.id()))
+                .andExpect(jsonPath("$.slug").value(category.slug()))
+                .andExpect(jsonPath("$.name").value(category.name()));
 
-        // Assert
-        assertEquals(category1, result);
         verify(categoryService).getById(id);
     }
 
     @Test
-    void getById_notExistingId_shouldThrowException() {
-        // Arrange
-        Integer id = 99;
+    void getCategoryById_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
+        int id = 99;
+        when(categoryService.getById(id)).thenThrow(new CategoryNotExistException("Category not found"));
 
-        when(categoryService.getById(id)).thenThrow(new CategoryNotExistException("Category with id " + id + " does not exist"));
+        mockMvc.perform(get("/api/v1/places/categories/{id}", id))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.exceptionName").value("CategoryNotExistException"))
+                .andExpect(jsonPath("$.exceptionMessage").value("Category not found"));
 
-        // Act & Assert
-        var exception = assertThrows(CategoryNotExistException.class, () -> {
-            categoryController.getById(id);
-        });
-
-        assertEquals("Category with id 99 does not exist", exception.getMessage());
         verify(categoryService).getById(id);
     }
 
     @Test
-    void create_shouldReturnCreatedCategory() {
-        // Arrange
-        when(categoryService.create(categoryCreateDto1)).thenReturn(category1);
+    void createANewCategory_shouldCreateCategory() throws Exception {
+        CategoryCreateDto createDto = new CategoryCreateDto("new-category", "New Category");
+        Category createdCategory = new Category(2, createDto.slug(), createDto.name());
 
-        // Act
-        Category result = categoryController.create(categoryCreateDto1);
+        when(categoryService.create(any(CategoryCreateDto.class))).thenReturn(createdCategory);
 
-        // Assert
-        assertEquals(categoryCreateDto1.name(), result.name());
-        assertEquals(categoryCreateDto1.slug(), result.slug());
-        verify(categoryService).create(categoryCreateDto1);
+        mockMvc.perform(post("/api/v1/places/categories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createDto)))
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(createdCategory.id()))
+                .andExpect(jsonPath("$.slug").value(createdCategory.slug()))
+                .andExpect(jsonPath("$.name").value(createdCategory.name()));
+
+        verify(categoryService).create(createDto);
     }
 
     @Test
-    void update_existingId() {
-        // Arrange
-        Integer id = 1;
+    void updateAnExistingCategory_shouldUpdateCategory() throws Exception {
+        int id = 1;
+        CategoryUpdateDto updateDto = new CategoryUpdateDto("updated-category", "Updated Category");
 
-        when(categoryService.update(id, categoryUpdateDto1)).thenReturn(new Category(id, categoryUpdateDto1.slug(), categoryUpdateDto1.name()));
+        when(categoryService.update(eq(id), any(CategoryUpdateDto.class)))
+                .thenReturn(new Category(id, updateDto.slug(), updateDto.name()));
 
-        // Act
-        Category result = categoryController.update(id, categoryUpdateDto1);
+        mockMvc.perform(put("/api/v1/places/categories/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateDto)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.slug").value(updateDto.slug()))
+                .andExpect(jsonPath("$.name").value(updateDto.name()));
 
-        // Assert
-        assertEquals(categoryUpdateDto1.name(), result.name());
-        verify(categoryService).update(eq(id), any());
+        verify(categoryService).update(eq(id), any(CategoryUpdateDto.class));
     }
 
     @Test
-    void update_nonExistingId() {
-        // Arrange
-        Integer id = 99;
+    void updateAnExistingCategory_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
+        int id = 99;
+        CategoryUpdateDto updateDto = new CategoryUpdateDto("updated-category", "Updated Category");
 
-        when(categoryService.update(eq(id), any())).thenThrow(new CategoryNotExistException("Category with id " + id + " does not exist"));
+        when(categoryService.update(eq(id), any(CategoryUpdateDto.class)))
+                .thenThrow(new CategoryNotExistException("Category not found"));
 
-        // Act & Assert
-        CategoryNotExistException exception = assertThrows(CategoryNotExistException.class, () -> {
-            categoryController.update(id, categoryUpdateDto1);
-        });
+        mockMvc.perform(put("/api/v1/places/categories/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateDto)))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.exceptionName").value("CategoryNotExistException"))
+                .andExpect(jsonPath("$.exceptionMessage").value("Category not found"));
 
-        assertEquals("Category with id 99 does not exist", exception.getMessage());
-        verify(categoryService).update(eq(id), any());
+        verify(categoryService).update(eq(id), any(CategoryUpdateDto.class));
     }
 
     @Test
-    void delete_existingId() {
-        // Arrange
-        Integer id = 1;
+    void deleteACategoryById_shouldDeleteCategory() throws Exception {
+        int id = 1;
 
-        when(categoryService.delete(id)).thenReturn(category1);
+        mockMvc.perform(delete("/api/v1/places/categories/{id}", id))
+                .andExpect(status().isNoContent());
 
-        // Act
-        categoryController.delete(id);
-
-        // Assert
         verify(categoryService).delete(id);
-        verifyNoMoreInteractions(categoryService);
     }
 
-
     @Test
-    void delete_nonExistingId() {
-        // Arrange
-        Integer id = 99;
+    void deleteACategoryById_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
+        int id = 99;
+        doThrow(new CategoryNotExistException("Category not found")).when(categoryService).delete(id);
 
-        doThrow(new CategoryNotExistException("Category with id " + id + " does not exist")).when(categoryService).delete(id);
+        mockMvc.perform(delete("/api/v1/places/categories/{id}", id))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.exceptionName").value("CategoryNotExistException"))
+                .andExpect(jsonPath("$.exceptionMessage").value("Category not found"));
 
-        // Act & Assert
-        CategoryNotExistException exception = assertThrows(CategoryNotExistException.class, () -> {
-            categoryController.delete(id);
-        });
-
-        assertEquals("Category with id 99 does not exist", exception.getMessage());
         verify(categoryService).delete(id);
     }
 }
