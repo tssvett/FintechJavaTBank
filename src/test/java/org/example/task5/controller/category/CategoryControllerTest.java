@@ -58,7 +58,7 @@ class CategoryControllerTest {
                 .andExpect(jsonPath("$[0].id").value(category.id()))
                 .andExpect(jsonPath("$[0].slug").value(category.slug()))
                 .andExpect(jsonPath("$[0].name").value(category.name()));
-
+      
         verify(categoryService).getAll();
     }
 
@@ -73,7 +73,7 @@ class CategoryControllerTest {
                 .andExpect(jsonPath("$.id").value(category.id()))
                 .andExpect(jsonPath("$.slug").value(category.slug()))
                 .andExpect(jsonPath("$.name").value(category.name()));
-
+      
         verify(categoryService).getById(id);
     }
 
@@ -87,7 +87,7 @@ class CategoryControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.exceptionName").value("CategoryNotExistException"))
                 .andExpect(jsonPath("$.exceptionMessage").value("Category not found"));
-
+      
         verify(categoryService).getById(id);
     }
 
@@ -169,7 +169,7 @@ class CategoryControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.exceptionName").value("CategoryNotExistException"))
                 .andExpect(jsonPath("$.exceptionMessage").value("Category not found"));
-
+      
         verify(categoryService).delete(id);
     }
 }
