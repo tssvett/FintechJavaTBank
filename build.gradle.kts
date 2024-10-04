@@ -92,7 +92,8 @@ tasks.withType<JacocoReport> {
     classDirectories.setFrom(
         sourceSets.main.get().output.asFileTree.matching {
             exclude("org/example/task3/**")
-            exclude("org/example/task5/dto/**")
+            exclude("org/example/task5/**")
+            exclude("org/example/task8/dto/**")
         }
     )
 }
