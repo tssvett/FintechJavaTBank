@@ -8,3 +8,9 @@ rest:
             locations:
                 type: GET
                 uri: /locations/
+    currency-rate-service:
+        host: http://www.cbr.ru/scripts
+        methods:
+            rates:
+                type: GET
+                uri: /XML_daily.asp

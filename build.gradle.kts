@@ -53,6 +53,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-webflux
     implementation("org.springframework:spring-webflux:6.1.13")
 
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
+
 
 }
 
