@@ -1,8 +1,10 @@
 package org.example.task8.integration;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.task5.exception.KudaGoException;
+import org.example.task8.exception.ServiceUnavailableException;
+import org.example.task8.integration.circuitbreaker.CurrencyRateFallback;
 import org.example.task8.parser.Parser;
 import org.example.task8.parser.xml.model.Valute;
 import org.example.task8.properties.CurrencyClientProperties;
@@ -20,7 +22,9 @@ public class CurrencyRateServiceClient {
     private final Parser<List<Valute>> xmlParser;
     private final WebClient webClient;
     private final CurrencyClientProperties currencyClientProperties;
+    private final CurrencyRateFallback currencyRateFallback;
 
+    @CircuitBreaker(name = "currencyRateServiceClient", fallbackMethod = "currencyRateFallback.handleFallback")
     public List<Valute> getCurrencyRates() {
         return webClient
                 .get()
@@ -28,7 +32,7 @@ public class CurrencyRateServiceClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
                     log.error("Error response: {}", clientResponse.statusCode());
-                    return Mono.error(new KudaGoException("Failed to fetch currencies: " + clientResponse.statusCode()));
+                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: " + clientResponse.statusCode()));
                 })
                 .bodyToMono(String.class)
                 .map(xmlParser::parse)

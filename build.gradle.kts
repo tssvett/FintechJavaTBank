@@ -55,6 +55,9 @@ dependencies {
 
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
 
+    implementation("io.github.resilience4j:resilience4j-spring-boot2:2.1.0")
+    implementation("io.github.resilience4j:resilience4j-reactor:1.7.1")
+
 
 }
 
