@@ -3,7 +3,7 @@ package org.example.task8.currency.converter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task8.parser.xml.model.Valute;
-import org.example.task8.utils.BigDecimalCurrencyParser;
+import org.example.task8.utils.numbers.BigDecimalCurrencyParser;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

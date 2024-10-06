@@ -1,8 +1,20 @@
 package org.example.task8.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.math.BigDecimal;
+
 public record ConvertCurrencyRequest(
+        @NotBlank(message = "field 'fromCurrency' cannot be empty")
         String fromCurrency,
+
+        @NotBlank(message = "field 'toCurrency' cannot be empty")
         String toCurrency,
-        double amount
+
+        @NotNull(message = "field 'amount' cannot be null")
+        @Min(value = 0, message = "field 'amount' must be greater than 0")
+        BigDecimal amount
 ) {
 }

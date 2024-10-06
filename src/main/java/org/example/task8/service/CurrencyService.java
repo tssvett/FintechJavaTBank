@@ -37,7 +37,7 @@ public class CurrencyService {
 
         Valute fromValute = getValuteByCode(valuteList, convertCurrencyRequest.fromCurrency());
         Valute toValute = getValuteByCode(valuteList, convertCurrencyRequest.toCurrency());
-        BigDecimal amount = BigDecimal.valueOf(convertCurrencyRequest.amount());
+        BigDecimal amount = convertCurrencyRequest.amount();
 
         BigDecimal convertionResult = currencyConverter.convertValue(fromValute, toValute, amount);
         return new ConvertCurrencyResponse(convertCurrencyRequest.fromCurrency(), convertCurrencyRequest.toCurrency(), convertionResult);

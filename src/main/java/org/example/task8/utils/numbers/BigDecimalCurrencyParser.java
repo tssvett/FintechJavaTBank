@@ -1,4 +1,4 @@
-package org.example.task8.utils;
+package org.example.task8.utils.numbers;
 
 import org.springframework.stereotype.Component;
 
