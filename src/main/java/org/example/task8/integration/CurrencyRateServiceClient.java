@@ -8,6 +8,7 @@ import org.example.task8.integration.circuitbreaker.CurrencyRateFallback;
 import org.example.task8.parser.Parser;
 import org.example.task8.parser.xml.model.Valute;
 import org.example.task8.properties.CurrencyClientProperties;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -25,6 +26,7 @@ public class CurrencyRateServiceClient {
     private final CurrencyRateFallback currencyRateFallback;
 
     @CircuitBreaker(name = "currencyRateServiceClient", fallbackMethod = "currencyRateFallback.handleFallback")
+    @Cacheable(value = "currencyCache", key = "#root.method.name", unless = "#result == null")
     public List<Valute> getCurrencyRates() {
         return webClient
                 .get()

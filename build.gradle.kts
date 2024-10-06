@@ -58,6 +58,9 @@ dependencies {
     implementation("io.github.resilience4j:resilience4j-spring-boot2:2.1.0")
     implementation("io.github.resilience4j:resilience4j-reactor:1.7.1")
 
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
+    implementation("org.springframework.boot:spring-boot-starter-cache:3.1.3")
+
 
 }
 
