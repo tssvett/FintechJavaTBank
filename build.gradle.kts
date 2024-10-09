@@ -64,6 +64,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
     implementation("org.springframework.boot:spring-boot-starter-validation:3.3.4")
 
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
 
 
