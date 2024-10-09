@@ -6,6 +6,7 @@ import org.example.task8.currency.converter.CurrencyConverter;
 import org.example.task8.dto.ConvertCurrencyRequest;
 import org.example.task8.dto.ConvertCurrencyResponse;
 import org.example.task8.dto.CurrencyInfoDto;
+import org.example.task8.exception.ValuteNotExistException;
 import org.example.task8.exception.ValuteNotFoundException;
 import org.example.task8.integration.CurrencyRateServiceClient;
 import org.example.task8.mapper.CurrencyMapper;
@@ -29,7 +30,7 @@ public class CurrencyService {
                 .filter(v -> v.charCode().equals(code))
                 .findFirst()
                 .map(currencyMapper::toCurrencyInfoDto)
-                .orElseThrow(() -> new ValuteNotFoundException("Currency with code " + code + " does not exist"));
+                .orElseThrow(() -> new ValuteNotFoundException("Cant find currency with code: " + code + " in cb response"));
     }
 
     public ConvertCurrencyResponse convertCurrency(ConvertCurrencyRequest convertCurrencyRequest) {
@@ -49,6 +50,6 @@ public class CurrencyService {
                 .stream()
                 .filter(v -> v.charCode().equals(code))
                 .findFirst()
-                .orElseThrow(() -> new ValuteNotFoundException("Currency with code " + code + " does not exist"));
+                .orElseThrow(() -> new ValuteNotExistException("Currency with code " + code + " does not exist"));
     }
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.task8.advice.details.ExceptionDetails;
 import org.example.task8.exception.CurrencyClientException;
 import org.example.task8.exception.ServiceUnavailableException;
+import org.example.task8.exception.ValuteNotExistException;
 import org.example.task8.exception.ValuteNotFoundException;
 import org.example.task8.exception.XmlParserException;
 import org.example.task8.utils.validation.ValidationExceptionUtils;
@@ -41,13 +42,22 @@ public class CurrencyExceptionHandler {
                 ), headers, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    @ExceptionHandler(ValuteNotFoundException.class)
-    public ResponseEntity<ExceptionDetails> handleException(ValuteNotFoundException exception) {
+    @ExceptionHandler(ValuteNotExistException.class)
+    public ResponseEntity<ExceptionDetails> handleException(ValuteNotExistException exception) {
         return new ResponseEntity<>(
                 new ExceptionDetails(
                         HttpStatus.BAD_REQUEST.value(),
                         exception.getMessage()
                 ), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValuteNotFoundException.class)
+    public ResponseEntity<ExceptionDetails> handleException(ValuteNotFoundException exception) {
+        return new ResponseEntity<>(
+                new ExceptionDetails(
+                        HttpStatus.NOT_FOUND.value(),
+                        exception.getMessage()
+                ), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(XmlParserException.class)

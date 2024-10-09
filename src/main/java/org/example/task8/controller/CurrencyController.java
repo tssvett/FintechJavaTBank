@@ -3,12 +3,12 @@ package org.example.task8.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task8.currency.validator.ValidCurrency;
 import org.example.task8.dto.ConvertCurrencyRequest;
 import org.example.task8.dto.ConvertCurrencyResponse;
 import org.example.task8.dto.CurrencyInfoDto;
 import org.example.task8.service.CurrencyService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +27,7 @@ public class CurrencyController {
 
     @GetMapping(value = "/currencies/rates/{code}")
     @ResponseStatus(HttpStatus.OK)
-    public CurrencyInfoDto getCurrencyInfo(@PathVariable("code") String code) {
+    public CurrencyInfoDto getCurrencyInfo(@Valid @ValidCurrency @PathVariable("code") String code) {
         return currencyService.getCurrencyInfo(code);
     }
 
