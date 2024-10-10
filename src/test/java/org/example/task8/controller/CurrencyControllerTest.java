@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.task8.dto.ConvertCurrencyRequest;
 import org.example.task8.dto.ConvertCurrencyResponse;
 import org.example.task8.dto.CurrencyInfoDto;
+import org.example.task8.exception.ServiceUnavailableException;
 import org.example.task8.service.CurrencyService;
 import org.example.task8.utils.validation.ValidationExceptionUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -120,7 +121,6 @@ class CurrencyControllerTest {
     }
 
     @Test
-    @DisplayName("Test get currency info")
     void getCurrencyInfo_requestIsValid_shouldReturnOk() throws Exception {
 
         String code = "USD";
@@ -131,5 +131,19 @@ class CurrencyControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.currency").value(code))
                 .andExpect(jsonPath("$.rate").value(1.0));
+    }
+
+    @Test
+    void getCurrencyInfo_circuitBreakerIsOpen_shouldReturnServiceUnavailable() throws Exception {
+        String code = "USD";
+        when(currencyService.getCurrencyInfo(code)).thenThrow(new ServiceUnavailableException("Service unavailable"));
+
+        mockMvc.perform(get("/currencies/rates/{code}", code))
+                .andExpect(status().is(HttpStatus.SERVICE_UNAVAILABLE.value()))
+                .andExpect(jsonPath("$.code").value(HttpStatus.SERVICE_UNAVAILABLE.value()))
+                .andExpect(jsonPath("$.message").value("Service unavailable"));
+
+
+        verify(currencyService).getCurrencyInfo(code);
     }
 }

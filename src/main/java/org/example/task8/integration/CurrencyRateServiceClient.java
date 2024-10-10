@@ -2,6 +2,7 @@ package org.example.task8.integration;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task8.exception.ServiceUnavailableException;
 import org.example.task8.integration.circuitbreaker.CurrencyRateFallback;
