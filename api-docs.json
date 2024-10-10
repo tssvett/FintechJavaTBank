@@ -1,0 +1,211 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/currencies/convert": {
+      "post": {
+        "tags": [
+          "currency-controller"
+        ],
+        "summary": "Convert currency",
+        "description": "Converts an amount from one currency to another.",
+        "operationId": "convertCurrency",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConvertCurrencyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully converted currency",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConvertCurrencyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "One of the currencies not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable, try again later",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/currencies/rates/{code}": {
+      "get": {
+        "tags": [
+          "currency-controller"
+        ],
+        "summary": "Get currency information by code",
+        "description": "Retrieves detailed information about a currency based on its code.",
+        "operationId": "getCurrencyInfo",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "description": "The currency code (e.g., USD, EUR)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved currency information",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrencyInfoDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Currency not found",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Currency not exist",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service unavailable, try again later",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConvertCurrencyRequest": {
+        "required": [
+          "amount",
+          "fromCurrency",
+          "toCurrency"
+        ],
+        "type": "object",
+        "properties": {
+          "fromCurrency": {
+            "type": "string"
+          },
+          "toCurrency": {
+            "type": "string"
+          },
+          "amount": {
+            "minimum": 0,
+            "type": "number"
+          }
+        }
+      },
+      "ExceptionDetails": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ConvertCurrencyResponse": {
+        "required": [
+          "convertedAmount",
+          "fromCurrency",
+          "toCurrency"
+        ],
+        "type": "object",
+        "properties": {
+          "fromCurrency": {
+            "type": "string"
+          },
+          "toCurrency": {
+            "type": "string"
+          },
+          "convertedAmount": {
+            "minimum": 0,
+            "type": "number"
+          }
+        }
+      },
+      "CurrencyInfoDto": {
+        "required": [
+          "currency",
+          "rate"
+        ],
+        "type": "object",
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

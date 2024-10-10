@@ -1,10 +1,31 @@
+spring:
+  cache:
+    type: caffeine
+    time-to-live-seconds: 3600
+
 rest:
-    kudago-service:
-        host: https://kudago.com/public-api/v1.4
-        methods:
-            categories:
-                type: GET
-                uri: /place-categories/
-            locations:
-                type: GET
-                uri: /locations/
+  kudago-service:
+    host: https://kudago.com/public-api/v1.4
+    methods:
+      categories:
+        type: GET
+        uri: /place-categories/
+      locations:
+        type: GET
+        uri: /locations/
+  currency-rate-service:
+    host: http://www.cbr.ru/scripts
+    methods:
+      rates:
+        type: GET
+        uri: /XML_daily.asp
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        registerHealthIndicator: true
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3

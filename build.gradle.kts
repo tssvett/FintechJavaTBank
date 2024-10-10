@@ -53,6 +53,20 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-webflux
     implementation("org.springframework:spring-webflux:6.1.13")
 
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
+
+    implementation("io.github.resilience4j:resilience4j-spring-boot2:2.1.0")
+    implementation("io.github.resilience4j:resilience4j-reactor:1.7.1")
+
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
+    implementation("org.springframework.boot:spring-boot-starter-cache:3.1.3")
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.3.4")
+
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+
+
 
 }
 
@@ -92,7 +106,8 @@ tasks.withType<JacocoReport> {
     classDirectories.setFrom(
         sourceSets.main.get().output.asFileTree.matching {
             exclude("org/example/task3/**")
-            exclude("org/example/task5/dto/**")
+            exclude("org/example/task5/**")
+            exclude("org/example/task8/dto/**")
         }
     )
 }
