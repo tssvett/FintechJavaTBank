@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -33,6 +34,15 @@ public class CurrencyService {
                 .orElseThrow(() -> new ValuteNotFoundException("Cant find currency with code: " + code + " in cb response"));
     }
 
+    public CompletableFuture<CurrencyInfoDto> getCurrencyInfoFuture(String code) {
+        return currencyRateServiceClient.getCurrencyRatesFuture()
+                .thenApply(currency -> currency.stream()
+                        .filter(v -> v.charCode().equals(code))
+                        .findFirst()
+                        .map(currencyMapper::toCurrencyInfoDto)
+                        .orElseThrow(() -> new ValuteNotFoundException("Cant find currency with code: " + code + " in cb response")));
+    }
+
     public ConvertCurrencyResponse convertCurrency(ConvertCurrencyRequest convertCurrencyRequest) {
         List<Valute> valuteList = currencyRateServiceClient.getCurrencyRates();
 
@@ -43,6 +53,20 @@ public class CurrencyService {
         BigDecimal convertionResult = currencyConverter.convertValue(fromValute, toValute, amount);
         return new ConvertCurrencyResponse(convertCurrencyRequest.fromCurrency(), convertCurrencyRequest.toCurrency(), convertionResult);
     }
+
+    public CompletableFuture<ConvertCurrencyResponse> convertCurrencyFuture(ConvertCurrencyRequest convertCurrencyRequest) {
+        return currencyRateServiceClient.getCurrencyRatesFuture()
+                .thenApply(valuteList -> {
+                    Valute fromValute = getValuteByCode(valuteList, convertCurrencyRequest.fromCurrency());
+                    Valute toValute = getValuteByCode(valuteList, convertCurrencyRequest.toCurrency());
+                    BigDecimal amount = convertCurrencyRequest.amount();
+
+                    BigDecimal conversionResult = currencyConverter.convertValue(fromValute, toValute, amount);
+                    return new ConvertCurrencyResponse(convertCurrencyRequest.fromCurrency(), convertCurrencyRequest.toCurrency(), conversionResult);
+                });
+    }
+
+
 
 
     private Valute getValuteByCode(List<Valute> valuteList, String code) {

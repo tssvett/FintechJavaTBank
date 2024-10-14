@@ -2,7 +2,7 @@ package org.example.task5.controller;
 
 import java.util.List;
 
-public interface Controller<I, T, C, U> {
+public interface CrudController<I, T, C, U> {
 
     List<T> getAll();
 
