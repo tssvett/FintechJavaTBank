@@ -29,3 +29,7 @@ resilience4j:
         sliding-window-size: 10
         wait-duration-in-open-state: 10s
         permitted-number-of-calls-in-half-open-state: 3
+
+data-initialization:
+  threads: 2
+  period-seconds: 60
