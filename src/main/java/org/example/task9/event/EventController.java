@@ -31,6 +31,6 @@ public class EventController {
                                  @Valid @ValidCurrency @RequestParam String currency,
                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(required = false) LocalDate dateFrom,
                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(required = false) LocalDate dateTo) {
-        return eventService.getEvents(budget, currency, dateFrom, dateTo).get();
+        return eventService.getEventsReactive(budget, currency, dateFrom, dateTo).toFuture().get();
     }
 }

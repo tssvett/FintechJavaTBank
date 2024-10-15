@@ -12,6 +12,8 @@ import org.example.task8.integration.CurrencyRateServiceClient;
 import org.example.task8.mapper.CurrencyMapper;
 import org.example.task8.parser.xml.model.Valute;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,6 +45,17 @@ public class CurrencyService {
                         .orElseThrow(() -> new ValuteNotFoundException("Cant find currency with code: " + code + " in cb response")));
     }
 
+    public Mono<CurrencyInfoDto> getCurrencyInfoReactive(String code) {
+        return currencyRateServiceClient.getCurrencyRatesReactive()
+                .flatMap(currencyRates ->
+                        Flux.fromIterable(currencyRates)
+                                .filter(v -> v.charCode().equals(code))
+                                .single() // Получаем единственный элемент или выбрасываем ошибку, если не найден
+                                .map(currencyMapper::toCurrencyInfoDto)
+                                .switchIfEmpty(Mono.error(new ValuteNotFoundException("Can't find currency with code: " + code + " in cb response")))
+                );
+    }
+
     public ConvertCurrencyResponse convertCurrency(ConvertCurrencyRequest convertCurrencyRequest) {
         List<Valute> valuteList = currencyRateServiceClient.getCurrencyRates();
 
@@ -63,6 +76,23 @@ public class CurrencyService {
 
                     BigDecimal conversionResult = currencyConverter.convertValue(fromValute, toValute, amount);
                     return new ConvertCurrencyResponse(convertCurrencyRequest.fromCurrency(), convertCurrencyRequest.toCurrency(), conversionResult);
+                });
+    }
+
+    public Mono<ConvertCurrencyResponse> convertCurrencyReactive(ConvertCurrencyRequest convertCurrencyRequest) {
+        return currencyRateServiceClient.getCurrencyRatesReactive()
+                .flatMap(valuteList -> {
+                    Valute fromValute = getValuteByCode(valuteList, convertCurrencyRequest.fromCurrency());
+                    Valute toValute = getValuteByCode(valuteList, convertCurrencyRequest.toCurrency());
+                    BigDecimal amount = convertCurrencyRequest.amount();
+
+                    // Проверка на наличие валют
+                    if (fromValute == null || toValute == null) {
+                        return Mono.error(new ValuteNotFoundException("One of the currencies was not found."));
+                    }
+
+                    BigDecimal conversionResult = currencyConverter.convertValue(fromValute, toValute, amount);
+                    return Mono.just(new ConvertCurrencyResponse(convertCurrencyRequest.fromCurrency(), convertCurrencyRequest.toCurrency(), conversionResult));
                 });
     }
 

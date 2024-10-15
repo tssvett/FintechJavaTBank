@@ -78,4 +78,25 @@ public class KudaGoServiceClient {
                 .map(EventResponse::results)
                 .toFuture();
     }
+
+    public Mono<List<Event>> getEventsReactive(LocalDate dateFrom, LocalDate dateTo) {
+        return webClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path(kudaGoProperties.getMethods().getEvents().getUri())
+                        .queryParam("actual_since", dateFrom.toString())
+                        .queryParam("actual_until", dateTo.toString())
+                        .queryParam("order_by", "is_free,price")
+                        .queryParam("text_format", "text")
+                        .queryParam("location", "smr")
+                        .queryParam("fields", "id,title,price,is_free")
+                        .build())
+                .retrieve()
+                .onStatus(HttpStatusCode::isError, clientResponse -> {
+                    log.error("Error response: {}", clientResponse.statusCode());
+                    return Mono.error(new KudaGoException("Failed to fetch events: " + clientResponse.statusCode()));
+                })
+                .bodyToMono(EventResponse.class)
+                .map(EventResponse::results);
+    }
 }
