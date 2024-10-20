@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest
 @AutoConfigureMockMvc
-class CurrencyControllerTest {
+class CurrencyCrudControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

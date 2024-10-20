@@ -61,7 +61,7 @@ class DataInitializerTest {
         when(kudaGoServiceClient.getLocations()).thenReturn(locations);
 
         //Act && Assert
-        assertDoesNotThrow(() -> dataInitializer.initializeData());
+        assertDoesNotThrow(() -> dataInitializer.threadingInitializeData());
     }
 
     @Test
@@ -70,7 +70,7 @@ class DataInitializerTest {
         when(kudaGoServiceClient.getCategories()).thenThrow(RuntimeException.class);
 
         //Act && Assert
-        assertThrows(DataInitializationException.class, () -> dataInitializer.initializeData());
+        assertThrows(DataInitializationException.class, () -> dataInitializer.threadingInitializeData());
     }
 
     @Test
@@ -79,6 +79,6 @@ class DataInitializerTest {
         when(kudaGoServiceClient.getLocations()).thenThrow(RuntimeException.class);
 
         //Act && Assert
-        assertThrows(DataInitializationException.class, () -> dataInitializer.initializeData());
+        assertThrows(DataInitializationException.class, () -> dataInitializer.threadingInitializeData());
     }
 }
