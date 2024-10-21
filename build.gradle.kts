@@ -66,6 +66,15 @@ dependencies {
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.3.4")
+
+    // https://mvnrepository.com/artifact/org.liquibase/liquibase-core
+    implementation("org.liquibase:liquibase-core:4.29.2")
+
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql:42.7.4")
+
 
 
 }
