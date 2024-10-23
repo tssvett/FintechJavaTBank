@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset tssvett:create-table-events
+--changeset tssvett:create-table-apiEvents
 
 CREATE TABLE IF NOT EXISTS events(
     id BIGINT NOT NULL PRIMARY KEY,

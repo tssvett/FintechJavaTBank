@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public record Event(Long id,
-                    String title,
-                    String price,
-                    @JsonProperty("is_free") boolean isFree) {
+public record ApiEvent(Long id,
+                       String title,
+                       String price,
+                       @JsonProperty("is_free") boolean isFree) {
 
     private static final Pattern PRICE_PATTERN = Pattern.compile("\\d+(?:\\s?\\d+)*");
 

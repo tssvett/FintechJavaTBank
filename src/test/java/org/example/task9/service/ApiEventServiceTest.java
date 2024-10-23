@@ -6,8 +6,7 @@ import org.example.task8.currency.converter.CurrencyConverter;
 import org.example.task8.dto.CurrencyInfoDto;
 import org.example.task8.service.CurrencyService;
 import org.example.task9.exception.DateBoundsException;
-import org.example.task9.model.Event;
-import org.example.task9.service.EventService;
+import org.example.task9.model.ApiEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-class EventServiceTest {
+class ApiEventServiceTest {
 
     @Mock
     private KudaGoServiceClient kudaGoServiceClient;
@@ -39,14 +38,14 @@ class EventServiceTest {
     @InjectMocks
     private EventService eventService;
 
-    private Event event1;
-    private Event event2;
+    private ApiEvent apiEvent1;
+    private ApiEvent apiEvent2;
 
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        event1 = new Event(1L, "Event 1", "100.0", false);
-        event2 = new Event(2L, "Event 2", "200.0", false);
+        apiEvent1 = new ApiEvent(1L, "Event 1", "100.0", false);
+        apiEvent2 = new ApiEvent(2L, "Event 2", "200.0", false);
     }
 
     @Test
@@ -57,16 +56,16 @@ class EventServiceTest {
         String currencyCode = "USD";
         Double budget = 150.0;
 
-        List<Event> events = Arrays.asList(event1, event2);
+        List<ApiEvent> apiEvents = Arrays.asList(apiEvent1, apiEvent2);
         CurrencyInfoDto currencyInfoDto = new CurrencyInfoDto(currencyCode, "1.0");
 
-        when(kudaGoServiceClient.getEventsReactive(dateFrom, dateTo)).thenReturn(Mono.just(events));
+        when(kudaGoServiceClient.getEventsReactive(dateFrom, dateTo)).thenReturn(Mono.just(apiEvents));
         when(currencyService.getCurrencyInfoReactive(currencyCode)).thenReturn(Mono.just(currencyInfoDto));
         when(currencyConverter.getPriceInRubles(currencyInfoDto, budget)).thenReturn(BigDecimal.valueOf(150));
 
         // Act
-        Mono<List<Event>> resultMono = eventService.getEventsReactive(budget, currencyCode, dateFrom, dateTo);
-        List<Event> result = resultMono.block();
+        Mono<List<ApiEvent>> resultMono = eventService.getEventsReactive(budget, currencyCode, dateFrom, dateTo);
+        List<ApiEvent> result = resultMono.block();
 
         // Assert
         assertNotNull(result);
@@ -91,19 +90,19 @@ class EventServiceTest {
         String currencyCode = "USD";
         Double budget = 150.0;
 
-        List<Event> events = Arrays.asList(event1, event2);
+        List<ApiEvent> apiEvents = Arrays.asList(apiEvent1, apiEvent2);
         CurrencyInfoDto currencyInfoDto = new CurrencyInfoDto(currencyCode, "1.0");
         LocalDate today = LocalDate.now();
         var dateFrom = today.minusDays(today.getDayOfWeek().getValue() - 1);
         var dateTo = today.plusDays(7 - today.getDayOfWeek().getValue());
 
-        when(kudaGoServiceClient.getEventsReactive(dateFrom, dateTo)).thenReturn(Mono.just(events));
+        when(kudaGoServiceClient.getEventsReactive(dateFrom, dateTo)).thenReturn(Mono.just(apiEvents));
         when(currencyService.getCurrencyInfoReactive(currencyCode)).thenReturn(Mono.just(currencyInfoDto));
         when(currencyConverter.getPriceInRubles(currencyInfoDto, budget)).thenReturn(BigDecimal.valueOf(150));
 
         // Act
-        Mono<List<Event>> resultMono = eventService.getEventsReactive(budget, currencyCode, null, null);
-        List<Event> result = resultMono.block();
+        Mono<List<ApiEvent>> resultMono = eventService.getEventsReactive(budget, currencyCode, null, null);
+        List<ApiEvent> result = resultMono.block();
 
         // Assert
         assertNotNull(result);

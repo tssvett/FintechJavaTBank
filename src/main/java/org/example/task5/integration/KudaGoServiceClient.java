@@ -7,7 +7,7 @@ import org.example.task5.model.Category;
 import org.example.task5.model.Location;
 import org.example.task5.properties.KudaGoProperties;
 import org.example.task9.dto.EventResponse;
-import org.example.task9.model.Event;
+import org.example.task9.model.ApiEvent;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
@@ -57,7 +57,7 @@ public class KudaGoServiceClient {
                 .block();
     }
 
-    public CompletableFuture<List<Event>> getEventsFuture(LocalDate dateFrom, LocalDate dateTo) {
+    public CompletableFuture<List<ApiEvent>> getEventsFuture(LocalDate dateFrom, LocalDate dateTo) {
         return webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
@@ -79,7 +79,7 @@ public class KudaGoServiceClient {
                 .toFuture();
     }
 
-    public Mono<List<Event>> getEventsReactive(LocalDate dateFrom, LocalDate dateTo) {
+    public Mono<List<ApiEvent>> getEventsReactive(LocalDate dateFrom, LocalDate dateTo) {
         return webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
