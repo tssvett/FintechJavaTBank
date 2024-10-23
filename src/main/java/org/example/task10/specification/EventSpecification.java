@@ -6,11 +6,13 @@ import org.example.task10.enitiy.Event;
 import org.example.task10.enitiy.Place;
 import org.example.task10.specification.criteria.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class EventSpecification {
 
     public Specification<Event> filterEventsBySearchCriteria(SearchCriteria searchCriteria) {
