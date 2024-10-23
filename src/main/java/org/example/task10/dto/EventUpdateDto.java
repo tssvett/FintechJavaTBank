@@ -8,9 +8,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record EventUpdateDto(
-        @NotNull Long eventIdToUpdate,
-        @NotBlank String name,
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @NotNull LocalDate date,
-        @NotNull UUID placeId
+        @NotNull(message = "eventIdToUpdate cannot be null") Long eventIdToUpdate,
+        @NotBlank(message = "name cannot be empty") String name,
+
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @NotNull(message = "date cannot be null") LocalDate date,
+
+        @NotNull(message = "placeId cannot be null") UUID placeId
 ) {
 }

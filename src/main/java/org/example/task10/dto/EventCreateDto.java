@@ -8,8 +8,11 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record EventCreateDto(
-        @NotBlank String name,
-        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @NotNull LocalDate date,
-        @NotNull UUID placeId
+        @NotBlank(message = "field 'name' cannot be empty") String name,
+
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @NotNull(message = "field 'date' cannot be empty") LocalDate date,
+
+        @NotNull(message = "field 'placeId' cannot be empty") UUID placeId
 ) {
 }
