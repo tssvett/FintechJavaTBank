@@ -1,5 +1,7 @@
 package org.example.task5.utils.mapping;
 
+
+import lombok.NoArgsConstructor;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.dto.location.LocationCreateDto;
@@ -7,6 +9,7 @@ import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.model.Category;
 import org.example.task5.model.Location;
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Mapper {
     public static Category toCategory(int id, CategoryCreateDto categoryCreateDto) {
         return new Category(id, categoryCreateDto.slug(), categoryCreateDto.name());
