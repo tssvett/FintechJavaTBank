@@ -2,7 +2,7 @@ package org.example.task10.service.crud.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.task10.enitiy.Place;
+import org.example.task10.entity.Place;
 import org.example.task10.exception.EntityDeleteException;
 import org.example.task10.exception.PlaceNotFoundException;
 import org.example.task10.repository.PlaceRepository;

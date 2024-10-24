@@ -1,6 +1,6 @@
 package org.example.task10.repository;
 
-import org.example.task10.enitiy.Place;
+import org.example.task10.entity.Place;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.task10.dto.EventCreateDto;
 import org.example.task10.dto.EventReadDto;
 import org.example.task10.dto.EventUpdateDto;
-import org.example.task10.enitiy.Event;
+import org.example.task10.entity.Event;
 import org.example.task10.exception.EntityDeleteException;
 import org.example.task10.repository.EventRepository;
 import org.example.task10.service.crud.CrudService;

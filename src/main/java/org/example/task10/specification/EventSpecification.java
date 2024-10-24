@@ -2,8 +2,8 @@ package org.example.task10.specification;
 
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
-import org.example.task10.enitiy.Event;
-import org.example.task10.enitiy.Place;
+import org.example.task10.entity.Event;
+import org.example.task10.entity.Place;
 import org.example.task10.specification.criteria.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

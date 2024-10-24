@@ -43,7 +43,7 @@ public class EventService {
             throw new DateBoundsException("dateTo must be after dateFrom");
         }
 
-        CompletableFuture<List<ApiEvent>> eventsFuture = kudaGoServiceClient.getEventsFuture(dateFrom, dateTo);
+        CompletableFuture<List<ApiEvent>> eventsFuture = kudaGoServiceClient.getEventsFuture(dateFrom, dateTo, "smr");
         CompletableFuture<CurrencyInfoDto> currencyInfoFuture = currencyService.getCurrencyInfoFuture(currencyCode);
 
         return eventsFuture.thenCombine(currencyInfoFuture, (events, currencyInfoDto) -> events.stream()
