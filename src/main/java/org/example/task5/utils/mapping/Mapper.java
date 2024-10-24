@@ -2,12 +2,13 @@ package org.example.task5.utils.mapping;
 
 
 import lombok.NoArgsConstructor;
+import org.example.task10.entity.Place;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
-import org.example.task5.model.Category;
 import org.example.task5.model.ApiLocation;
+import org.example.task5.model.Category;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Mapper {
@@ -41,5 +42,10 @@ public class Mapper {
 
     public static LocationUpdateDto toLocationUpdateDto(ApiLocation location) {
         return new LocationUpdateDto(location.slug(), location.name());
+    }
+
+    public static ApiLocation toApiLocation(Place place) {
+        return new ApiLocation(place.getSlug(), place.getName());
+
     }
 }

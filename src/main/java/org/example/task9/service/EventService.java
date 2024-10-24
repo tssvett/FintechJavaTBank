@@ -28,8 +28,8 @@ public class EventService {
     private final CurrencyService currencyService;
     private final CurrencyConverter currencyConverter;
 
-    public CompletableFuture<List<ApiEvent>> getEvents(@NotNull Double budget, @NotNull String currencyCode,
-                                                       LocalDate dateFrom, LocalDate dateTo) {
+    public CompletableFuture<List<ApiEvent>> getEventsFuture(@NotNull Double budget, @NotNull String currencyCode,
+                                                             LocalDate dateFrom, LocalDate dateTo) {
         Optional<LocalDate> dateFromOpt = Optional.ofNullable(dateFrom);
         Optional<LocalDate> dateToOpt = Optional.ofNullable(dateTo);
 
@@ -81,4 +81,6 @@ public class EventService {
                             .collectList();
                 });
     }
+
+
 }

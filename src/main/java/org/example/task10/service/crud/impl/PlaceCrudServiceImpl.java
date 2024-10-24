@@ -8,6 +8,7 @@ import org.example.task10.exception.PlaceNotFoundException;
 import org.example.task10.repository.PlaceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -28,4 +29,10 @@ public class PlaceCrudServiceImpl {
             throw new EntityDeleteException("Failed to delete place with id: " + id);
         }
     }
+
+    public List<Place> getAll() {
+        return placeRepository.findAll();
+    }
+
+
 }
