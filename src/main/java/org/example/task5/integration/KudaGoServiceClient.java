@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task5.exception.KudaGoException;
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.properties.KudaGoProperties;
 import org.example.task9.dto.EventResponse;
-import org.example.task9.model.Event;
+import org.example.task9.model.ApiEvent;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
@@ -41,7 +41,7 @@ public class KudaGoServiceClient {
                 .block();
     }
 
-    public List<Location> getLocations() {
+    public List<ApiLocation> getLocations() {
         return webClient
                 .get()
                 .uri(kudaGoProperties.getMethods().getLocations().getUri())
@@ -50,14 +50,14 @@ public class KudaGoServiceClient {
                     log.error("Error response: {}", clientResponse.statusCode());
                     return Mono.error(new KudaGoException("Failed to fetch locations: " + clientResponse.statusCode()));
                 })
-                .bodyToMono(new ParameterizedTypeReference<List<Location>>() {
+                .bodyToMono(new ParameterizedTypeReference<List<ApiLocation>>() {
                 })
                 .doOnNext(locations -> log.info("Successfully fetched {} locations", locations.size()))
                 .doOnError(e -> log.error("Error fetching locations: {}", e.getMessage()))
                 .block();
     }
 
-    public CompletableFuture<List<Event>> getEventsFuture(LocalDate dateFrom, LocalDate dateTo) {
+    public CompletableFuture<List<ApiEvent>> getEventsFuture(LocalDate dateFrom, LocalDate dateTo, String location) {
         return webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
@@ -66,8 +66,9 @@ public class KudaGoServiceClient {
                         .queryParam("actual_until", dateTo.toString())
                         .queryParam("order_by", "is_free,price")
                         .queryParam("text_format", "text")
-                        .queryParam("location", "smr")
-                        .queryParam("fields", "id,title,price,is_free")
+                        .queryParam("location", location)
+                        .queryParam("fields", "id,title,price,is_free,dates,place")
+                        .queryParam("expand", "place")
                         .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
@@ -76,10 +77,11 @@ public class KudaGoServiceClient {
                 })
                 .bodyToMono(EventResponse.class)
                 .map(EventResponse::results)
+                .doOnNext(events -> log.info("Successfully fetched {} events", events.size()))
                 .toFuture();
     }
 
-    public Mono<List<Event>> getEventsReactive(LocalDate dateFrom, LocalDate dateTo) {
+    public Mono<List<ApiEvent>> getEventsReactive(LocalDate dateFrom, LocalDate dateTo) {
         return webClient
                 .get()
                 .uri(uriBuilder -> uriBuilder
@@ -89,7 +91,8 @@ public class KudaGoServiceClient {
                         .queryParam("order_by", "is_free,price")
                         .queryParam("text_format", "text")
                         .queryParam("location", "smr")
-                        .queryParam("fields", "id,title,price,is_free")
+                        .queryParam("fields", "id,title,price,is_free,dates,place")
+                        .queryParam("expand", "place")
                         .build())
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {

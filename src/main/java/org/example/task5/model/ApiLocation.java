@@ -1,6 +1,6 @@
 package org.example.task5.model;
 
-public record Location(
+public record ApiLocation(
         String slug,
         String name
 ) {

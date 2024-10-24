@@ -3,7 +3,7 @@ package org.example.task5.initializer;
 import org.example.task5.exception.DataInitializationException;
 import org.example.task5.integration.KudaGoServiceClient;
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.repository.InMemoryRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,10 +31,10 @@ class DataInitializerTest {
     private InMemoryRepository<Integer, Category> categoryRepository;
 
     @Mock
-    private InMemoryRepository<String, Location> locationRepository;
+    private InMemoryRepository<String, ApiLocation> locationRepository;
 
     @InjectMocks
-    private DataInitializer dataInitializer;
+    private Initializer dataInitializer;
 
     static Stream<Arguments> generateData() {
         List<Category> fullCategoriesList = List.of(
@@ -43,10 +43,10 @@ class DataInitializerTest {
                 new Category(3, "category-3", "Category 3")
         );
 
-        List<Location> fullLocationsList = List.of(
-                new Location("location-1", "Location 1"),
-                new Location("location-2", "Location 2"),
-                new Location("location-3", "Location 3")
+        List<ApiLocation> fullLocationsList = List.of(
+                new ApiLocation("location-1", "Location 1"),
+                new ApiLocation("location-2", "Location 2"),
+                new ApiLocation("location-3", "Location 3")
         );
         return Stream.of(
                 Arguments.of(fullCategoriesList, fullLocationsList)
@@ -55,7 +55,7 @@ class DataInitializerTest {
 
     @ParameterizedTest
     @MethodSource("generateData")
-    void initializeData_successKudaGoServiceClient_successfullyInitialized(List<Category> categories, List<Location> locations) {
+    void initializeData_successKudaGoServiceClient_successfullyInitialized(List<Category> categories, List<ApiLocation> locations) {
         //Arrange
         when(kudaGoServiceClient.getCategories()).thenReturn(categories);
         when(kudaGoServiceClient.getLocations()).thenReturn(locations);

@@ -3,7 +3,7 @@ package org.example.task5.service.location;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.exception.LocationNotExistException;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.repository.InMemoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class LocationServiceTest {
+class ApiLocationServiceTest {
 
     @Mock
-    private InMemoryRepository<String, Location> inMemoryRepository;
+    private InMemoryRepository<String, ApiLocation> inMemoryRepository;
 
     @InjectMocks
     private LocationService locationService;
@@ -39,16 +39,16 @@ class LocationServiceTest {
     @Test
     void getAll() {
         // Arrange
-        Location location1 = new Location("location-1", "Location 1");
-        Location location2 = new Location("location-2", "Location 2");
-        HashMap<String, Location> locations = new HashMap<>();
+        ApiLocation location1 = new ApiLocation("location-1", "Location 1");
+        ApiLocation location2 = new ApiLocation("location-2", "Location 2");
+        HashMap<String, ApiLocation> locations = new HashMap<>();
         locations.put(location1.slug(), location1);
         locations.put(location2.slug(), location2);
 
         when(inMemoryRepository.findAll()).thenReturn(locations);
 
         // Act
-        List<Location> result = locationService.getAll();
+        List<ApiLocation> result = locationService.getAll();
 
         // Assert
         assertEquals(2, result.size());
@@ -61,12 +61,12 @@ class LocationServiceTest {
     void getById_existingId() {
         // Arrange
         String id = "location-1";
-        Location location = new Location(id, "Location 1");
+        ApiLocation location = new ApiLocation(id, "Location 1");
 
         when(inMemoryRepository.findById(id)).thenReturn(Optional.of(location));
 
         // Act
-        Location result = locationService.getById(id);
+        ApiLocation result = locationService.getById(id);
 
         // Assert
         assertEquals(location, result);
@@ -93,12 +93,12 @@ class LocationServiceTest {
     void create() {
         // Arrange
         LocationCreateDto dto = new LocationCreateDto("location-1", "Location 1");
-        Location location = new Location(dto.slug(), dto.name());
+        ApiLocation location = new ApiLocation(dto.slug(), dto.name());
 
         when(inMemoryRepository.save(dto.slug(), location)).thenReturn(location);
 
         // Act
-        Location result = locationService.create(dto);
+        ApiLocation result = locationService.create(dto);
 
         // Assert
         assertEquals(location, result);
@@ -111,10 +111,10 @@ class LocationServiceTest {
         String id = "location-1";
         LocationUpdateDto dto = new LocationUpdateDto(id, "Updated Location");
 
-        when(inMemoryRepository.update(eq(id), any())).thenReturn(Optional.of(new Location(id, dto.name())));
+        when(inMemoryRepository.update(eq(id), any())).thenReturn(Optional.of(new ApiLocation(id, dto.name())));
 
         // Act
-        Location result = locationService.update(id, dto);
+        ApiLocation result = locationService.update(id, dto);
 
         // Assert
         assertEquals(dto.name(), result.name());
@@ -142,10 +142,10 @@ class LocationServiceTest {
         // Arrange
         String id = "location-1";
 
-        when(inMemoryRepository.deleteById(id)).thenReturn(Optional.of(new Location(id, "Location 1")));
+        when(inMemoryRepository.deleteById(id)).thenReturn(Optional.of(new ApiLocation(id, "Location 1")));
 
         // Act
-        Location result = locationService.delete(id);
+        ApiLocation result = locationService.delete(id);
 
         // Assert
         assertEquals(id, result.slug());

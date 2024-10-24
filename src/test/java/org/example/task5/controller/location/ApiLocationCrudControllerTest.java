@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.exception.LocationNotExistException;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.service.KudaGoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(LocationCrudController.class)
-class LocationCrudControllerTest {
+class ApiLocationCrudControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,14 +39,14 @@ class LocationCrudControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private KudaGoService<String, Location, LocationCreateDto, LocationUpdateDto> locationService;
+    private KudaGoService<String, ApiLocation, LocationCreateDto, LocationUpdateDto> locationService;
 
-    private Location location;
+    private ApiLocation location;
 
     @BeforeEach
     void setUp() {
         // Initialize a Location object with slug and name
-        location = new Location("test-location", "Test Location");
+        location = new ApiLocation("test-location", "Test Location");
     }
 
     @Test
@@ -93,7 +93,7 @@ class LocationCrudControllerTest {
     @Test
     void createANewLocation_shouldCreateLocation() throws Exception {
         LocationCreateDto createDto = new LocationCreateDto("new-location", "New Location");
-        Location createdLocation = new Location(createDto.slug(), createDto.name());
+        ApiLocation createdLocation = new ApiLocation(createDto.slug(), createDto.name());
 
         when(locationService.create(any(LocationCreateDto.class))).thenReturn(createdLocation);
 
@@ -114,7 +114,7 @@ class LocationCrudControllerTest {
         LocationUpdateDto updateDto = new LocationUpdateDto("updated-location", "Updated Name");
 
         when(locationService.update(eq(slug), any(LocationUpdateDto.class)))
-                .thenReturn(new Location(updateDto.slug(), updateDto.name()));
+                .thenReturn(new ApiLocation(updateDto.slug(), updateDto.name()));
 
         mockMvc.perform(put("/api/v1/locations/{id}", slug)
                         .contentType(MediaType.APPLICATION_JSON)

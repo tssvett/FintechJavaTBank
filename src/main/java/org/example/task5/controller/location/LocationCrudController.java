@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.task5.controller.CrudController;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.service.KudaGoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,14 +25,14 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/locations")
 @RequiredArgsConstructor
-public class LocationCrudController implements CrudController<String, Location, LocationCreateDto, LocationUpdateDto> {
-    private final KudaGoService<String, Location, LocationCreateDto, LocationUpdateDto> locationService;
+public class LocationCrudController implements CrudController<String, ApiLocation, LocationCreateDto, LocationUpdateDto> {
+    private final KudaGoService<String, ApiLocation, LocationCreateDto, LocationUpdateDto> locationService;
 
     @Override
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Location> getAll() {
+    public List<ApiLocation> getAll() {
         return locationService.getAll();
     }
 
@@ -40,7 +40,7 @@ public class LocationCrudController implements CrudController<String, Location, 
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Location getById(@PathVariable("id") String id) {
+    public ApiLocation getById(@PathVariable("id") String id) {
         return locationService.getById(id);
     }
 
@@ -48,7 +48,7 @@ public class LocationCrudController implements CrudController<String, Location, 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Location create(@RequestBody LocationCreateDto location) {
+    public ApiLocation create(@RequestBody LocationCreateDto location) {
         return locationService.create(location);
     }
 
@@ -57,7 +57,7 @@ public class LocationCrudController implements CrudController<String, Location, 
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Location update(@PathVariable("id") String id, @RequestBody LocationUpdateDto location) {
+    public ApiLocation update(@PathVariable("id") String id, @RequestBody LocationUpdateDto location) {
         return locationService.update(id, location);
     }
 

@@ -2,12 +2,13 @@ package org.example.task5.utils.mapping;
 
 
 import lombok.NoArgsConstructor;
+import org.example.task10.entity.Place;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class Mapper {
@@ -27,19 +28,24 @@ public class Mapper {
         return new CategoryUpdateDto(category.slug(), category.name());
     }
 
-    public static Location toLocation(LocationCreateDto locationCreateDto) {
-        return new Location(locationCreateDto.slug(), locationCreateDto.name());
+    public static ApiLocation toLocation(LocationCreateDto locationCreateDto) {
+        return new ApiLocation(locationCreateDto.slug(), locationCreateDto.name());
     }
 
-    public static Location toLocation(LocationUpdateDto locationUpdateDto) {
-        return new Location(locationUpdateDto.slug(), locationUpdateDto.name());
+    public static ApiLocation toLocation(LocationUpdateDto locationUpdateDto) {
+        return new ApiLocation(locationUpdateDto.slug(), locationUpdateDto.name());
     }
 
-    public static LocationCreateDto toLocationCreateDto(Location location) {
+    public static LocationCreateDto toLocationCreateDto(ApiLocation location) {
         return new LocationCreateDto(location.slug(), location.name());
     }
 
-    public static LocationUpdateDto toLocationUpdateDto(Location location) {
+    public static LocationUpdateDto toLocationUpdateDto(ApiLocation location) {
         return new LocationUpdateDto(location.slug(), location.name());
+    }
+
+    public static ApiLocation toApiLocation(Place place) {
+        return new ApiLocation(place.getSlug(), place.getName());
+
     }
 }

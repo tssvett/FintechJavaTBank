@@ -5,6 +5,7 @@ import org.example.task5.initializer.Initializer;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.concurrent.ScheduledExecutorService;
@@ -19,7 +20,7 @@ public class DataInitializerConfig {
 
     @EventListener(ApplicationStartedEvent.class)
     public void onApplicationReady() {
-        scheduledThreadPool.scheduleAtFixedRate(dataInitializer::threadingInitializeData, 0,
+        scheduledThreadPool.scheduleAtFixedRate(dataInitializer::initializeDatabase, 0,
                 dataInitializationPeriod.toSeconds(), TimeUnit.SECONDS);
 
     }

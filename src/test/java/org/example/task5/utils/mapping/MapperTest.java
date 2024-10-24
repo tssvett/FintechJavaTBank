@@ -5,7 +5,7 @@ import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ class MapperTest {
     CategoryCreateDto categoryCreateDto;
     CategoryUpdateDto categoryUpdateDto;
 
-    Location location;
+    ApiLocation location;
     LocationCreateDto locationCreateDto;
     LocationUpdateDto locationUpdateDto;
 
@@ -27,7 +27,7 @@ class MapperTest {
         categoryCreateDto = new CategoryCreateDto("category-1", "Category 1");
         categoryUpdateDto = new CategoryUpdateDto("category-1-updated", "Category 1 Updated");
 
-        location = new Location("location-1", "Location 1");
+        location = new ApiLocation("location-1", "Location 1");
         locationCreateDto = new LocationCreateDto("location-1", "Location 1");
         locationUpdateDto = new LocationUpdateDto("location-1-updated", "Location 1 Updated");
     }
@@ -78,7 +78,7 @@ class MapperTest {
     void toLocation_fromCreateDto_shouldReturnMappedLocation() {
         // Arrange
         // Act
-        Location mappedLocation = Mapper.toLocation(locationCreateDto);
+        ApiLocation mappedLocation = Mapper.toLocation(locationCreateDto);
         // Assert
         assertEquals("location-1", mappedLocation.slug());
         assertEquals("Location 1", mappedLocation.name());
@@ -88,7 +88,7 @@ class MapperTest {
     void testToLocation_fromUpdateDto_shouldReturnMappedLocation() {
         // Arrange
         // Act
-        Location mappedLocation = Mapper.toLocation(locationUpdateDto);
+        ApiLocation mappedLocation = Mapper.toLocation(locationUpdateDto);
         // Assert
         assertEquals("location-1-updated", mappedLocation.slug());
         assertEquals("Location 1 Updated", mappedLocation.name());
