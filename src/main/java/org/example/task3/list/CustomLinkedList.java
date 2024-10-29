@@ -1,6 +1,6 @@
 package org.example.task3.list;
 
-import java.util.List;
+import org.example.task3.iterator.CustomLinkedIterator;
 
 public interface CustomLinkedList<T> {
 
@@ -15,5 +15,7 @@ public interface CustomLinkedList<T> {
     void addAll(CustomLinkedList<T> list);
 
     int size();
+
+    CustomLinkedIterator<T> iterator();
 
 }
