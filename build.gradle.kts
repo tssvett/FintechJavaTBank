@@ -89,6 +89,12 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
     implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
 
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+    testImplementation("org.springframework.security:spring-security-test:6.3.4")
+
+    // https://mvnrepository.com/artifact/org.testcontainers/postgresql
+    testImplementation("org.testcontainers:postgresql:1.20.3")
+
 
 }
 

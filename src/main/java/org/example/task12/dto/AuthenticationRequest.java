@@ -1,7 +1,7 @@
 package org.example.task12.dto;
 
 public record AuthenticationRequest(
-        String login,
+        String username,
         String password,
         boolean rememberMe
 ) {

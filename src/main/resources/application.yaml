@@ -53,6 +53,7 @@ rest:
 data-initialization:
   threads: 2
   period-seconds: 600
+  enable: false
 
 security:
   jwt:

@@ -1,14 +1,12 @@
 package org.example.task12.security.service;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.example.task12.entity.ApiUser;
 import org.example.task12.properties.JwtProperties;
+import org.example.task12.security.utils.JwtExtractUtils;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.SecretKey;
 import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,6 +15,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class JwtService {
     private final JwtProperties jwtProperties;
+    private final JwtExtractUtils jwtExtractUtils;
 
     public String generateToken(ApiUser apiUser, boolean rememberMe) {
 
@@ -25,7 +24,7 @@ public class JwtService {
                 .subject(apiUser.getUsername())
                 .issuedAt(getIssuedAt())
                 .expiration(getExpiration(rememberMe))
-                .signWith(getSignInKey(), Jwts.SIG.HS256)
+                .signWith(jwtExtractUtils.getSignInKey(), Jwts.SIG.HS256)
                 .compact();
     }
 
@@ -37,9 +36,5 @@ public class JwtService {
         Duration expirationTime = rememberMe ? jwtProperties.getRememberMeExpiration() : jwtProperties.getDefaultExpiration();
 
         return new Date(System.currentTimeMillis() + expirationTime.toMillis());
-    }
-
-    private SecretKey getSignInKey() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtProperties.getJwtKey()));
     }
 }
