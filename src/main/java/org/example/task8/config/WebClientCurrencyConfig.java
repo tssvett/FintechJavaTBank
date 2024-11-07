@@ -8,11 +8,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebClientConfig {
+public class WebClientCurrencyConfig {
     private final CurrencyClientProperties properties;
 
     @Bean
-    public WebClient webClient() {
+    public WebClient currencyWebClient() {
         return WebClient.builder()
                 .baseUrl(properties.getHost())
                 .build();

@@ -2,7 +2,7 @@ package org.example.task5.controller.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.task5.controller.Controller;
+import org.example.task5.controller.CrudController;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.model.Category;
@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/places/categories")
 @RequiredArgsConstructor
-public class CategoryController implements Controller<Integer, Category, CategoryCreateDto, CategoryUpdateDto> {
+public class CategoryCrudController implements CrudController<Integer, Category, CategoryCreateDto, CategoryUpdateDto> {
     private final KudaGoService<Integer, Category, CategoryCreateDto, CategoryUpdateDto> categoryService;
 
     @Override

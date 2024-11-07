@@ -20,6 +20,7 @@ public class KudaGoProperties {
     public static class Methods {
         private Method categories;
         private Method locations;
+        private Method events;
 
         @Getter
         @Setter

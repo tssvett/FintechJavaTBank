@@ -2,7 +2,7 @@ package org.example.task5.controller.location;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.task5.controller.Controller;
+import org.example.task5.controller.CrudController;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.model.Location;
@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/locations")
 @RequiredArgsConstructor
-public class LocationController implements Controller<String, Location, LocationCreateDto, LocationUpdateDto> {
+public class LocationCrudController implements CrudController<String, Location, LocationCreateDto, LocationUpdateDto> {
     private final KudaGoService<String, Location, LocationCreateDto, LocationUpdateDto> locationService;
 
     @Override
