@@ -1,7 +1,7 @@
 package org.example.task9.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.task9.model.Event;
+import org.example.task9.model.ApiEvent;
 import org.example.task9.service.EventService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class EventControllerTest {
+class ApiEventControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,20 +38,20 @@ class EventControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private Event event1;
-    private Event event2;
+    private ApiEvent apiEvent1;
+    private ApiEvent apiEvent2;
 
     @BeforeEach
     public void setup() {
-        event1 = new Event(1L, "Concert", "100", false);
-        event2 = new Event(2L, "Movie", "200", false);
+        apiEvent1 = new ApiEvent(1L, "Concert", "100", false);
+        apiEvent2 = new ApiEvent(2L, "Movie", "200", false);
 
     }
 
     @Test
     @DisplayName("Get events successfully")
     void getEvents_validRequest_shouldReturnOk() throws Exception {
-        Mono<List<Event>> events = Mono.just(Arrays.asList(event1, event2));
+        Mono<List<ApiEvent>> events = Mono.just(Arrays.asList(apiEvent1, apiEvent2));
         when(eventService.getEventsReactive(100.0, "USD", null, null)).thenReturn(events);
 
         mockMvc.perform(get("/api/v1/events")
@@ -59,10 +59,10 @@ class EventControllerTest {
                         .param("currency", "USD"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id").value(event1.id()))
-                .andExpect(jsonPath("$[0].title").value(event1.title()))
-                .andExpect(jsonPath("$[0].price").value(event1.price()))
-                .andExpect(jsonPath("$[0].is_free").value(event1.isFree()));
+                .andExpect(jsonPath("$[0].id").value(apiEvent1.id()))
+                .andExpect(jsonPath("$[0].title").value(apiEvent1.title()))
+                .andExpect(jsonPath("$[0].price").value(apiEvent1.price()))
+                .andExpect(jsonPath("$[0].is_free").value(apiEvent1.isFree()));
 
         verify(eventService).getEventsReactive(100.0, "USD", null, null);
     }
@@ -87,7 +87,7 @@ class EventControllerTest {
     @Test
     @DisplayName("Get events with date range")
     void getEvents_withDateRange_shouldReturnOk() throws Exception {
-        Mono<List<Event>> events = Mono.just(Arrays.asList(event1, event2));
+        Mono<List<ApiEvent>> events = Mono.just(Arrays.asList(apiEvent1, apiEvent2));
         when(eventService.getEventsReactive(100.0, "USD", LocalDate.of(2023, 10, 19), LocalDate.of(2023, 10, 21))).thenReturn(events);
 
         mockMvc.perform(get("/api/v1/events")

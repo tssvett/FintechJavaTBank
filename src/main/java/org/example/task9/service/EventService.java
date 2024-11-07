@@ -8,7 +8,7 @@ import org.example.task8.currency.converter.CurrencyConverter;
 import org.example.task8.dto.CurrencyInfoDto;
 import org.example.task8.service.CurrencyService;
 import org.example.task9.exception.DateBoundsException;
-import org.example.task9.model.Event;
+import org.example.task9.model.ApiEvent;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -28,8 +28,8 @@ public class EventService {
     private final CurrencyService currencyService;
     private final CurrencyConverter currencyConverter;
 
-    public CompletableFuture<List<Event>> getEvents(@NotNull Double budget, @NotNull String currencyCode,
-                                                    LocalDate dateFrom, LocalDate dateTo) {
+    public CompletableFuture<List<ApiEvent>> getEventsFuture(@NotNull Double budget, @NotNull String currencyCode,
+                                                             LocalDate dateFrom, LocalDate dateTo) {
         Optional<LocalDate> dateFromOpt = Optional.ofNullable(dateFrom);
         Optional<LocalDate> dateToOpt = Optional.ofNullable(dateTo);
 
@@ -43,7 +43,7 @@ public class EventService {
             throw new DateBoundsException("dateTo must be after dateFrom");
         }
 
-        CompletableFuture<List<Event>> eventsFuture = kudaGoServiceClient.getEventsFuture(dateFrom, dateTo);
+        CompletableFuture<List<ApiEvent>> eventsFuture = kudaGoServiceClient.getEventsFuture(dateFrom, dateTo, "smr");
         CompletableFuture<CurrencyInfoDto> currencyInfoFuture = currencyService.getCurrencyInfoFuture(currencyCode);
 
         return eventsFuture.thenCombine(currencyInfoFuture, (events, currencyInfoDto) -> events.stream()
@@ -51,8 +51,8 @@ public class EventService {
                 .toList());
     }
 
-    public Mono<List<Event>> getEventsReactive(@NotNull Double budget, @NotNull String currencyCode,
-                                               LocalDate dateFrom, LocalDate dateTo) {
+    public Mono<List<ApiEvent>> getEventsReactive(@NotNull Double budget, @NotNull String currencyCode,
+                                                  LocalDate dateFrom, LocalDate dateTo) {
         // Set default dates if not provided
         if (dateFrom == null || dateTo == null) {
             LocalDate today = LocalDate.now();
@@ -66,19 +66,21 @@ public class EventService {
         }
 
         // Fetch events and currency info reactively
-        Mono<List<Event>> eventsMono = kudaGoServiceClient.getEventsReactive(dateFrom, dateTo);
+        Mono<List<ApiEvent>> eventsMono = kudaGoServiceClient.getEventsReactive(dateFrom, dateTo);
         Mono<CurrencyInfoDto> currencyInfoMono = currencyService.getCurrencyInfoReactive(currencyCode);
 
         // Combine the results and filter based on budget
         return Mono.zip(eventsMono, currencyInfoMono)
                 .flatMap(tuple -> {
-                    List<Event> events = tuple.getT1();
+                    List<ApiEvent> apiEvents = tuple.getT1();
                     CurrencyInfoDto currencyInfoDto = tuple.getT2();
                     BigDecimal budgetInRubles = currencyConverter.getPriceInRubles(currencyInfoDto, budget);
 
-                    return Flux.fromIterable(events)
+                    return Flux.fromIterable(apiEvents)
                             .filter(event -> event.isFitsBudget(budgetInRubles))
                             .collectList();
                 });
     }
+
+
 }

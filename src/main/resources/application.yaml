@@ -1,7 +1,33 @@
 spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    change-log: db/changelog-master.xml
+    enabled: true
+
   cache:
     type: caffeine
     time-to-live-seconds: 3600
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      default:
+        registerHealthIndicator: true
+        failure-rate-threshold: 50
+        sliding-window-size: 10
+        wait-duration-in-open-state: 10s
+        permitted-number-of-calls-in-half-open-state: 3
 
 rest:
   kudago-service:
@@ -23,16 +49,6 @@ rest:
       rates:
         type: GET
         uri: /XML_daily.asp
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      default:
-        registerHealthIndicator: true
-        failure-rate-threshold: 50
-        sliding-window-size: 10
-        wait-duration-in-open-state: 10s
-        permitted-number-of-calls-in-half-open-state: 3
 
 data-initialization:
   threads: 2
