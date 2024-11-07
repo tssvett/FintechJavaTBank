@@ -44,8 +44,8 @@ class ApiEventServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        apiEvent1 = new ApiEvent(1L, "Event 1", "100.0", false);
-        apiEvent2 = new ApiEvent(2L, "Event 2", "200.0", false);
+        apiEvent1 = new ApiEvent(1L, "Event 1", "100.0", false, null, null);
+        apiEvent2 = new ApiEvent(2L, "Event 2", "200.0", false,null, null);
     }
 
     @Test
