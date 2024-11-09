@@ -2,6 +2,7 @@ package org.example.task8.currency.converter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task8.dto.CurrencyInfoDto;
 import org.example.task8.parser.xml.model.Valute;
 import org.example.task8.utils.numbers.BigDecimalCurrencyParser;
 import org.springframework.stereotype.Component;
@@ -23,5 +24,9 @@ public class CurrencyConverter {
         log.info("Convertion {} from {} to {} is {}", amount, fromValute.charCode(), toValute.charCode(), result);
 
         return result;
+    }
+
+    public BigDecimal getPriceInRubles(CurrencyInfoDto currencyInfoDto, Double budget) {
+        return bigDecimalCurrencyParser.parseCurrencyValue(currencyInfoDto.rate()).multiply(BigDecimal.valueOf(budget));
     }
 }
