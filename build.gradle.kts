@@ -65,7 +65,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.3.4")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-
+    
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.3.4")
 
@@ -94,8 +94,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.testcontainers/postgresql
     testImplementation("org.testcontainers:postgresql:1.20.3")
-
-
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

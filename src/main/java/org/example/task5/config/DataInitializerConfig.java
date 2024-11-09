@@ -12,6 +12,10 @@ import java.time.Duration;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import java.time.Duration;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnProperty(value = "data-initialization.enable", havingValue = "true")

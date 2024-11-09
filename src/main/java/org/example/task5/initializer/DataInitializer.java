@@ -77,7 +77,7 @@ public class DataInitializer implements Initializer {
             List<Category> categories = kudaGoServiceClient.getCategories();
             saveCategories(categories);
             log.info("Categories successfully initialized");
-
+          
             List<ApiLocation> locations = kudaGoServiceClient.getLocations();
             saveLocations(locations);
             log.info("Locations successfully initialized");

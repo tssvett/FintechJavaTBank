@@ -26,7 +26,6 @@ public class CategoryService implements KudaGoService<Integer, Category, Categor
     private final IdGenerator idGenerator;
     private final CategoryHistory categoryHistory;
 
-
     @Override
     public List<Category> getAll() {
         return inMemoryRepository.findAll().values().stream().toList();

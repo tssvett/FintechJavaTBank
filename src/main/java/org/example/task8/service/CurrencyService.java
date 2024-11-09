@@ -96,9 +96,6 @@ public class CurrencyService {
                 });
     }
 
-
-
-
     private Valute getValuteByCode(List<Valute> valuteList, String code) {
         return valuteList
                 .stream()
