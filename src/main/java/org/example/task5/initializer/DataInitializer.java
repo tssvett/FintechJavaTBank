@@ -105,7 +105,7 @@ public class DataInitializer implements Initializer {
             Thread.currentThread().interrupt();
         }
     }
-
+  
     private void saveLocations(List<ApiLocation> locations) {
         for (ApiLocation location : locations) {
             locationMapRepository.save(location.slug(), location);

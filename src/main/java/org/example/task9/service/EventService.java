@@ -42,7 +42,6 @@ public class EventService {
         if (dateTo.isBefore(dateFrom)) {
             throw new DateBoundsException("dateTo must be after dateFrom");
         }
-
         CompletableFuture<List<ApiEvent>> eventsFuture = kudaGoServiceClient.getEventsFuture(dateFrom, dateTo, "smr");
         CompletableFuture<CurrencyInfoDto> currencyInfoFuture = currencyService.getCurrencyInfoFuture(currencyCode);
 
@@ -81,6 +80,4 @@ public class EventService {
                             .collectList();
                 });
     }
-
-
 }

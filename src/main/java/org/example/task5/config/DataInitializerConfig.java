@@ -8,12 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @RequiredArgsConstructor
 @ConditionalOnProperty(value = "data-initialization.enable", havingValue = "true")
 public class DataInitializerConfig {
     private final CommandInvoker commandInvoker;
-
 
     @EventListener(ApplicationStartedEvent.class)
     public void onApplicationReady() {
