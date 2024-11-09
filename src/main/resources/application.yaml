@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${USERNAME}
-    password: ${PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -53,10 +53,10 @@ rest:
 data-initialization:
   threads: 2
   period-seconds: 600
-  enable: false
+  enable: true
 
 security:
   jwt:
-    jwt-key: ${JWT_KEY:123456789}
+    jwt-key: ${JWT_KEY:mySuperSecureJWTSecretKey1234567890TOPSECRETSECRET}
     default-expiration: 600 # 10 minutes in seconds
     remember-me-expiration: 2592000 # 30 days in seconds

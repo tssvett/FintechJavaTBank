@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebClientConfig {
+public class WebClientBankConfig {
     private final KudaGoProperties properties;
 
     @Bean
