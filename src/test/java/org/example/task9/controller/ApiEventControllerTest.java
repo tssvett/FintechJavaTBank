@@ -1,6 +1,7 @@
 package org.example.task9.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.example.task9.model.ApiEvent;
 import org.example.task9.service.EventService;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.PostgreSQLContainer;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
@@ -41,6 +45,18 @@ class ApiEventControllerTest {
 
     private ApiEvent apiEvent1;
     private ApiEvent apiEvent2;
+
+    private static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17")
+            .withUsername("postgres")
+            .withPassword("123")
+            .withDatabaseName("test");
+
+    @SneakyThrows
+    @DynamicPropertySource
+    static void postgresqlProperties(DynamicPropertyRegistry registry) {
+        postgres.start();
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+    }
 
     @BeforeEach
     public void setup() {

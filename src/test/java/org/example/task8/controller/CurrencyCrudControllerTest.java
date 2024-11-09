@@ -1,6 +1,7 @@
 package org.example.task8.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.example.task8.dto.ConvertCurrencyRequest;
 import org.example.task8.dto.ConvertCurrencyResponse;
 import org.example.task8.dto.CurrencyInfoDto;
@@ -22,8 +23,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.math.BigDecimal;
 import java.util.stream.Stream;
@@ -62,6 +66,18 @@ class CurrencyCrudControllerTest {
     private ConvertCurrencyRequest successConvertRequest;
 
     private ConvertCurrencyResponse convertCurrencyResponse;
+
+    private static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17")
+            .withUsername("postgres")
+            .withPassword("123")
+            .withDatabaseName("test");
+
+    @SneakyThrows
+    @DynamicPropertySource
+    static void postgresqlProperties(DynamicPropertyRegistry registry) {
+        postgres.start();
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+    }
 
     @BeforeEach
     public void setup() {

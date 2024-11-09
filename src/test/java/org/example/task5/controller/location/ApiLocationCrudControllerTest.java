@@ -1,6 +1,7 @@
 package org.example.task5.controller.location;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.example.task5.dto.location.LocationCreateDto;
 import org.example.task5.dto.location.LocationUpdateDto;
 import org.example.task5.exception.LocationNotExistException;
@@ -15,7 +16,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.List;
 
@@ -46,6 +50,18 @@ class ApiLocationCrudControllerTest {
     private KudaGoService<String, ApiLocation, LocationCreateDto, LocationUpdateDto> locationService;
 
     private ApiLocation location;
+
+    private static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17")
+            .withUsername("postgres")
+            .withPassword("123")
+            .withDatabaseName("test");
+
+    @SneakyThrows
+    @DynamicPropertySource
+    static void postgresqlProperties(DynamicPropertyRegistry registry) {
+        postgres.start();
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+    }
 
     @BeforeEach
     void setUp() {
