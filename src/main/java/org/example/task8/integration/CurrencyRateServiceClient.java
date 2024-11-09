@@ -43,6 +43,7 @@ public class CurrencyRateServiceClient {
                 .doOnError(e -> log.error("Error fetching currencies: {}", e.getMessage()))
                 .block();
     }
+
     @CircuitBreaker(name = "currencyRateServiceClient", fallbackMethod = "currencyRateFallback.handleFallback")
     public CompletableFuture<List<Valute>> getCurrencyRatesFuture() {
         return currencyWebClient

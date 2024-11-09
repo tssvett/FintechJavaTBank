@@ -2,6 +2,7 @@ package org.example.task3.list.impl;
 
 
 
+import org.example.task3.iterator.CustomLinkedIterator;
 import org.example.task3.list.CustomLinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,6 +82,34 @@ class CustomLinkedListImplTest {
         for (int i = 0; i < expectedList.size(); i++) {
             assertEquals(expectedList.get(i), list.get(i));
         }
+    }
+
+    @Test
+    void testAddAllIterator(){
+        CustomLinkedList<String> expectedList = new CustomLinkedListImpl<>();
+        expectedList.add("test");
+        expectedList.add("test2");
+        expectedList.add("test3");
+        expectedList.iterator().forEachRemaining(list::add);
+        assertEquals(3, list.size());
+        for (int i = 0; i < expectedList.size(); i++) {
+            assertEquals(expectedList.get(i), list.get(i));
+        }
+    }
+
+    @Test
+    void testIterator() {
+        list.add("test");
+        list.add("test2");
+        list.add("test3");
+        CustomLinkedIterator<String> iterator = list.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals("test", iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("test2", iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("test3", iterator.next());
+        assertFalse(iterator.hasNext());
     }
 
     @Test

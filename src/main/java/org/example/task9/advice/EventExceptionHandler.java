@@ -22,4 +22,3 @@ public class EventExceptionHandler {
                 ), HttpStatus.NOT_FOUND);
     }
 }
-

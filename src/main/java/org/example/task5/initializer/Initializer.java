@@ -5,4 +5,6 @@ public interface Initializer {
     void threadingInitializeData();
 
     void initializeData();
+
+    void initializeDatabase();
 }
