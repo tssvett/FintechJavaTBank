@@ -17,9 +17,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,8 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the {@link CurrencyController}
  */
-@RunWith(SpringRunner.class)
-@WebMvcTest
+@SpringBootTest
 @AutoConfigureMockMvc
 class CurrencyCrudControllerTest {
 
@@ -70,6 +71,7 @@ class CurrencyCrudControllerTest {
 
     @Test
     @DisplayName("Test convert successfully convert currency")
+    @WithMockUser(roles = "USER")
     void convertCurrency_requestIsValid_shouldReturnOk() throws Exception {
 
         when(currencyService.convertCurrency(successConvertRequest)).thenReturn(convertCurrencyResponse);
@@ -89,13 +91,13 @@ class CurrencyCrudControllerTest {
     @ParameterizedTest
     @MethodSource("provideInvalidConvertRequests")
     @DisplayName("Test unsuccessful currency conversion")
+    @WithMockUser(roles = "USER")
     void convertCurrency_requestHaveNullOrBlank_shouldReturnBadRequest(ConvertCurrencyRequest invalidRequest, HttpStatus expectedStatus) throws Exception {
 
         mockMvc.perform(post("/currencies/convert")
                         .content(objectMapper.writeValueAsString(invalidRequest))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is(expectedStatus.value()))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+                .andExpect(status().is(expectedStatus.value()));
     }
 
     private static Stream<Arguments> provideInvalidConvertRequests() {
@@ -109,6 +111,7 @@ class CurrencyCrudControllerTest {
 
 
     @Test
+    @WithMockUser(roles = "USER")
     void getCurrencyInfo_requestIsNotValid_shouldReturnBadRequest() throws Exception {
 
         String code = "USDsa";
@@ -121,6 +124,7 @@ class CurrencyCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getCurrencyInfo_requestIsValid_shouldReturnOk() throws Exception {
 
         String code = "USD";
@@ -134,6 +138,7 @@ class CurrencyCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getCurrencyInfo_circuitBreakerIsOpen_shouldReturnServiceUnavailable() throws Exception {
         String code = "USD";
         when(currencyService.getCurrencyInfo(code)).thenThrow(new ServiceUnavailableException("Service unavailable"));

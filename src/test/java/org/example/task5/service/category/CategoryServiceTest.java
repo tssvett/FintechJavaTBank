@@ -1,5 +1,6 @@
 package org.example.task5.service.category;
 
+import org.example.task11.pattern.mementopattern.catetaker.CategoryHistory;
 import org.example.task5.dto.category.CategoryCreateDto;
 import org.example.task5.dto.category.CategoryUpdateDto;
 import org.example.task5.exception.CategoryNotExistException;
@@ -34,6 +35,9 @@ class CategoryServiceTest {
 
     @Mock
     private IdGenerator idGenerator;
+
+    @Mock
+    private CategoryHistory categoryHistory;
 
     @InjectMocks
     private CategoryService categoryService;
@@ -134,6 +138,7 @@ class CategoryServiceTest {
         CategoryUpdateDto mappedUpdateCategory = new CategoryUpdateDto("category-1-updated", "Category 1 Updated");
 
         when(inMemoryRepository.update(id1, updateCategory)).thenReturn(Optional.of(updateCategory));
+        when(inMemoryRepository.findById(id1)).thenReturn(Optional.of(category1));
 
         //Act
         var updatedCategory = categoryService.update(id1, mappedUpdateCategory);
@@ -141,43 +146,42 @@ class CategoryServiceTest {
         //Assert
         assertEquals(updateCategory, updatedCategory);
         assertNotEquals(updatedCategory, category1);
-        verify(inMemoryRepository).update(id1, updateCategory);
+        verify(inMemoryRepository).findById(id1);
     }
 
     @Test
     void update_nonExistingId_throwsCategoryNotExistException() {
         // Arrange
-        when(inMemoryRepository.update(eq(id1), any())).thenReturn(Optional.empty());
+        when(inMemoryRepository.findById(id1)).thenReturn(Optional.empty());
 
         // Act & Assert
         var exception = assertThrows(CategoryNotExistException.class, () -> categoryService.update(id1, categoryUpdateDto));
 
         assertEquals("Category with id 1 does not exist", exception.getMessage());
-        verify(inMemoryRepository).update(eq(id1), any());
+        verify(inMemoryRepository).findById(id1);
     }
 
     @Test
     void delete_existingId_returnCategory() {
         // Arrange
         when(inMemoryRepository.deleteById(id1)).thenReturn(Optional.of(category1));
+        when(inMemoryRepository.findById(id1)).thenReturn(Optional.of(category1));
 
         // Act
         Category result = categoryService.delete(id1);
 
         // Assert
         assertEquals(id1, result.id());
-        verify(inMemoryRepository).deleteById(id1);
+        verify(inMemoryRepository).findById(id1);
     }
 
     @Test
     void delete_nonExistingId_throwsCategoryNotExistException() {
         // Arrange
-        when(inMemoryRepository.deleteById(id1)).thenReturn(Optional.empty());
-
         // Act & Assert
         var exception = assertThrows(CategoryNotExistException.class, () -> categoryService.delete(id1));
 
         assertEquals("Category with id 1 does not exist", exception.getMessage());
-        verify(inMemoryRepository).deleteById(id1);
+        verify(inMemoryRepository).findById(id1);
     }
 }

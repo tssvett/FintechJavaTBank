@@ -9,9 +9,12 @@ import org.example.task5.service.KudaGoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -29,7 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CategoryCrudController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class CategoryCrudControllerTest {
 
     @Autowired
@@ -49,6 +53,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getAllCategories_shouldReturnAllCategories() throws Exception {
         when(categoryService.getAll()).thenReturn(List.of(category));
 
@@ -63,6 +68,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getCategoryById_shouldReturnCategory_whenCategoryExists() throws Exception {
         int id = 1;
         when(categoryService.getById(id)).thenReturn(category);
@@ -78,6 +84,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getCategoryById_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
         int id = 99;
         when(categoryService.getById(id)).thenThrow(new CategoryNotExistException("Category not found"));
@@ -92,6 +99,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void createANewCategory_shouldCreateCategory() throws Exception {
         CategoryCreateDto createDto = new CategoryCreateDto("new-category", "New Category");
         Category createdCategory = new Category(2, createDto.slug(), createDto.name());
@@ -111,6 +119,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void updateAnExistingCategory_shouldUpdateCategory() throws Exception {
         int id = 1;
         CategoryUpdateDto updateDto = new CategoryUpdateDto("updated-category", "Updated Category");
@@ -131,6 +140,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void updateAnExistingCategory_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
         int id = 99;
         CategoryUpdateDto updateDto = new CategoryUpdateDto("updated-category", "Updated Category");
@@ -150,6 +160,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void deleteACategoryById_shouldDeleteCategory() throws Exception {
         int id = 1;
 
@@ -160,6 +171,7 @@ class CategoryCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void deleteACategoryById_shouldReturnNotFound_whenCategoryDoesNotExist() throws Exception {
         int id = 99;
         doThrow(new CategoryNotExistException("Category not found")).when(categoryService).delete(id);

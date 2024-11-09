@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.xml.stream.Location;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -118,6 +117,7 @@ class ApiLocationServiceTest {
         LocationUpdateDto dto = new LocationUpdateDto(id, "Updated Location");
 
         when(inMemoryRepository.update(eq(id), any())).thenReturn(Optional.of(new ApiLocation(id, dto.name())));
+        when(inMemoryRepository.findById(id)).thenReturn(Optional.of(new ApiLocation(id, "Location 1")));
 
         // Act
         ApiLocation result = locationService.update(id, dto);
@@ -140,7 +140,7 @@ class ApiLocationServiceTest {
         });
 
         assertEquals("Location with id location-99 does not exist", exception.getMessage());
-        verify(inMemoryRepository).update(eq(id), any());
+        verify(inMemoryRepository).findById(id);
     }
 
     @Test
@@ -149,6 +149,7 @@ class ApiLocationServiceTest {
         String id = "location-1";
 
         when(inMemoryRepository.deleteById(id)).thenReturn(Optional.of(new ApiLocation(id, "Location 1")));
+        when(inMemoryRepository.findById(id)).thenReturn(Optional.of(new ApiLocation(id, "Location 1")));
 
         // Act
         ApiLocation result = locationService.delete(id);
@@ -171,9 +172,9 @@ class ApiLocationServiceTest {
         });
 
         assertEquals("Location with id location-99 does not exist", exception.getMessage());
-        verify(inMemoryRepository).deleteById(id);
+        verify(inMemoryRepository).findById(id);
     }
-  
+
     @Test
     void restoreLastState_successfully_restored() {
         // Arrange

@@ -9,9 +9,12 @@ import org.example.task5.service.KudaGoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -29,7 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(LocationCrudController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class ApiLocationCrudControllerTest {
 
     @Autowired
@@ -50,6 +54,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getAllLocations_shouldReturnAllLocations() throws Exception {
         when(locationService.getAll()).thenReturn(List.of(location));
 
@@ -63,6 +68,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getLocationBySlug_shouldReturnLocation_whenLocationExists() throws Exception {
         String slug = "test-location";
         when(locationService.getById(slug)).thenReturn(location);
@@ -77,6 +83,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void getLocationBySlug_shouldReturnNotFound_whenLocationDoesNotExist() throws Exception {
         String slug = "non-existent-location"; // Assuming this slug does not exist
         when(locationService.getById(slug)).thenThrow(new LocationNotExistException("Location not found"));
@@ -91,6 +98,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void createANewLocation_shouldCreateLocation() throws Exception {
         LocationCreateDto createDto = new LocationCreateDto("new-location", "New Location");
         ApiLocation createdLocation = new ApiLocation(createDto.slug(), createDto.name());
@@ -109,6 +117,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void updateAnExistingLocation_shouldUpdateLocation() throws Exception {
         String slug = "test-location";
         LocationUpdateDto updateDto = new LocationUpdateDto("updated-location", "Updated Name");
@@ -128,6 +137,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void updateAnExistingLocation_shouldReturnNotFound_whenLocationDoesNotExist() throws Exception {
         String slug = "non-existent-location"; // Assuming this slug does not exist
         LocationUpdateDto updateDto = new LocationUpdateDto("updated-location", "Updated Name");
@@ -147,6 +157,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void deleteALocationBySlug_shouldDeleteLocation() throws Exception {
         String slug = "test-location";
 
@@ -157,6 +168,7 @@ class ApiLocationCrudControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void deleteALocationBySlug_shouldReturnNotFound_whenLocationDoesNotExist() throws Exception {
         String slug = "non-existent-location";
         doThrow(new LocationNotExistException("Location not found")).when(locationService).delete(slug);
