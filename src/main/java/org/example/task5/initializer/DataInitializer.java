@@ -12,6 +12,7 @@ import org.example.task5.logtime.annotation.LogExecutionTime;
 import org.example.task5.model.ApiLocation;
 import org.example.task5.model.Category;
 import org.example.task5.repository.InMemoryRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
