@@ -43,9 +43,8 @@ class ApiEventControllerTest {
 
     @BeforeEach
     public void setup() {
-        apiEvent1 = new ApiEvent(1L, "Concert", "100", false);
-        apiEvent2 = new ApiEvent(2L, "Movie", "200", false);
-
+        apiEvent1 = new ApiEvent(1L, "Concert", "100", false, null, null);
+        apiEvent2 = new ApiEvent(2L, "Movie", "200", false, null, null);
     }
 
     @Test
