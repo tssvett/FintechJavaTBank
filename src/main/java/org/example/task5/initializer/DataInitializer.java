@@ -15,7 +15,11 @@ import org.example.task5.repository.InMemoryRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -82,7 +86,6 @@ public class DataInitializer implements Initializer {
             throw new DataInitializationException(e.getMessage());
         }
     }
-
 
     public void initializeDatabase() {
         initializerObservable.registerObserver(placeObserver);

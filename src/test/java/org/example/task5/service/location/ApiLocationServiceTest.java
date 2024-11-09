@@ -173,7 +173,7 @@ class ApiLocationServiceTest {
         assertEquals("Location with id location-99 does not exist", exception.getMessage());
         verify(inMemoryRepository).deleteById(id);
     }
-
+  
     @Test
     void restoreLastState_successfully_restored() {
         // Arrange
@@ -201,5 +201,4 @@ class ApiLocationServiceTest {
 
         verify(locationHistory).getMemento();
     }
-
 }

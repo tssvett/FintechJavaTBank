@@ -44,7 +44,7 @@ public class LocationService implements KudaGoService<String, ApiLocation, Locat
     public ApiLocation update(String id, LocationUpdateDto locationUpdateDto) {
         ApiLocation location = this.getById(id);
         locationHistory.addMemento(new LocationMemento(location.slug(), location.name()));
-
+      
         return inMemoryRepository.update(id, Mapper.toLocation(locationUpdateDto))
                 .orElseThrow(() -> new LocationNotExistException("Location with id " + id + " does not exist"));
     }
