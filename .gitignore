@@ -2,7 +2,8 @@
 !gradle/wrapper/gradle-wrapper.jar
 .gradle/
 .gitattributes
-
+*~
+amplicode.xml
 out/
 /logtime/out
 

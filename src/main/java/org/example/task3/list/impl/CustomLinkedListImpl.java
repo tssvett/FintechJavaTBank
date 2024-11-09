@@ -1,7 +1,10 @@
 package org.example.task3.list.impl;
 
 
+import org.example.task3.iterator.CustomLinkedIterator;
 import org.example.task3.list.CustomLinkedList;
+
+import java.util.function.Consumer;
 
 public class CustomLinkedListImpl<T> implements CustomLinkedList<T> {
     private Node<T> head;
@@ -110,5 +113,35 @@ public class CustomLinkedListImpl<T> implements CustomLinkedList<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public CustomLinkedIterator<T> iterator() {
+        return new CustomLinkedIteratorImpl();
+    }
+
+    private class CustomLinkedIteratorImpl implements CustomLinkedIterator<T> {
+
+        private Node<T> current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T data = current.data;
+            current = current.next;
+            return data;
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action) {
+            while (hasNext()) {
+                action.accept(current.data);
+                current = current.next;
+            }
+        }
     }
 }

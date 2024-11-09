@@ -1,7 +1,7 @@
 package org.example.task5.integration;
 
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
+import org.example.task5.model.ApiLocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ class KudaGoServiceClientIT {
     @Test
     void getLocations_shouldReturnListOfLocations() {
         //Act
-        List<Location> locationsFromClient = kudaGoServiceClient.getLocations();
+        List<ApiLocation> locationsFromClient = kudaGoServiceClient.getLocations();
 
         //Assert
         Assertions.assertEquals(2, locationsFromClient.size());

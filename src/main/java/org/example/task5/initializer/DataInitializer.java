@@ -3,15 +3,23 @@ package org.example.task5.initializer;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.task10.service.crud.impl.PlaceCrudServiceImpl;
+import org.example.task11.pattern.observer.InitializerObservable;
+import org.example.task11.pattern.observer.PlaceObserver;
 import org.example.task5.exception.DataInitializationException;
 import org.example.task5.integration.KudaGoServiceClient;
 import org.example.task5.logtime.annotation.LogExecutionTime;
+import org.example.task5.model.ApiLocation;
 import org.example.task5.model.Category;
-import org.example.task5.model.Location;
 import org.example.task5.repository.InMemoryRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -21,9 +29,12 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class DataInitializer implements Initializer {
     private final KudaGoServiceClient kudaGoServiceClient;
-    private final InMemoryRepository<Integer, Category> categoryRepository;
-    private final InMemoryRepository<String, Location> locationRepository;
+    private final InMemoryRepository<Integer, Category> categoryMapRepository;
+    private final InMemoryRepository<String, ApiLocation> locationMapRepository;
     private final ExecutorService fixedThreadPool;
+    private final InitializerObservable initializerObservable;
+    private final PlaceObserver placeObserver;
+    private final PlaceCrudServiceImpl placeCrudService;
 
 
     @LogExecutionTime
@@ -44,7 +55,7 @@ public class DataInitializer implements Initializer {
 
             fixedThreadPool.submit(() -> {
                 try {
-                    List<Location> locations = kudaGoServiceClient.getLocations();
+                    List<ApiLocation> locations = kudaGoServiceClient.getLocations();
                     saveLocations(locations);
                     log.info("Locations successfully initialized");
                 } finally {
@@ -67,13 +78,19 @@ public class DataInitializer implements Initializer {
             saveCategories(categories);
             log.info("Categories successfully initialized");
 
-            List<Location> locations = kudaGoServiceClient.getLocations();
+            List<ApiLocation> locations = kudaGoServiceClient.getLocations();
             saveLocations(locations);
             log.info("Locations successfully initialized");
         } catch (Exception e) {
             log.error("Error while initializing data: {}", e.getMessage());
             throw new DataInitializationException(e.getMessage());
         }
+    }
+
+    public void initializeDatabase() {
+        initializerObservable.registerObserver(placeObserver);
+        initializerObservable.setPlacesList(placeCrudService.getPlacesFromIntegrations());
+        initializerObservable.notifyObservers();
     }
 
     @PreDestroy
@@ -88,16 +105,16 @@ public class DataInitializer implements Initializer {
             Thread.currentThread().interrupt();
         }
     }
-
-    private void saveLocations(List<Location> locations) {
-        for (Location location : locations) {
-            locationRepository.save(location.slug(), location);
+  
+    private void saveLocations(List<ApiLocation> locations) {
+        for (ApiLocation location : locations) {
+            locationMapRepository.save(location.slug(), location);
         }
     }
 
     private void saveCategories(List<Category> categories) {
         for (Category category : categories) {
-            categoryRepository.save(category.id(), category);
+            categoryMapRepository.save(category.id(), category);
         }
     }
 }
