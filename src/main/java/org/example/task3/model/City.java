@@ -9,7 +9,7 @@ public class City {
     @JsonProperty("coords")
     private Coordinates coordinates;
 
-    public String toXML() {
+    public String toXml() {
         return String.format(
                 """
                         <City>

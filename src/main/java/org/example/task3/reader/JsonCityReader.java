@@ -1,11 +1,10 @@
 package org.example.task3.reader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.example.task3.model.City;
-
 import java.nio.file.Path;
 import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
+import org.example.task3.model.City;
 
 @Slf4j
 public class JsonCityReader {

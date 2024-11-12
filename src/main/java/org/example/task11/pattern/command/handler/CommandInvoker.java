@@ -1,12 +1,11 @@
 package org.example.task11.pattern.command.handler;
 
-import lombok.RequiredArgsConstructor;
-import org.example.task11.pattern.command.Command;
-import org.springframework.stereotype.Component;
-
 import java.time.Duration;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import lombok.RequiredArgsConstructor;
+import org.example.task11.pattern.command.Command;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

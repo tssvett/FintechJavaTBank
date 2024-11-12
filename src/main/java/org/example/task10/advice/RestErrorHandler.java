@@ -3,7 +3,6 @@ package org.example.task10.advice;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.task10.exception.EntityDeleteException;
 import org.example.task10.exception.PlaceNotFoundException;
-import org.example.task5.exception.DataInitializationException;
 import org.example.task8.advice.details.ExceptionDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

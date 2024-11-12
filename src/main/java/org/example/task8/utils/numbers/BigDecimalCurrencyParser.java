@@ -1,8 +1,7 @@
 package org.example.task8.utils.numbers;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
+import org.springframework.stereotype.Component;
 
 @Component
 public class BigDecimalCurrencyParser {

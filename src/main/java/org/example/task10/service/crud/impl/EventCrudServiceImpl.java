@@ -1,6 +1,7 @@
 package org.example.task10.service.crud.impl;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task10.dto.EventCreateDto;
@@ -13,8 +14,6 @@ import org.example.task10.service.crud.CrudService;
 import org.example.task10.specification.EventSpecification;
 import org.example.task10.utils.Mapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service

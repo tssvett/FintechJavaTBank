@@ -1,25 +1,26 @@
 package org.example.task9.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.example.task5.model.ApiLocation;
-
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.example.task5.model.ApiLocation;
 
 public record ApiEvent(Long id,
                        String title,
                        String price,
                        @JsonProperty("is_free") boolean isFree,
                        @JsonProperty("dates") List<DateResponse> dates,
-                        @JsonProperty("place") ApiLocation place) {
+                       @JsonProperty("place") ApiLocation place) {
 
     private static final Pattern PRICE_PATTERN = Pattern.compile("\\d+(?:\\s?\\d+)*");
 
     public boolean isFitsBudget(BigDecimal budget) {
-        if (isFree) return true;
+        if (isFree) {
+            return true;
+        }
 
         if (price == null || price.isEmpty()) {
             return false;

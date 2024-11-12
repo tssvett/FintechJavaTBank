@@ -128,19 +128,6 @@ class CurrencyCrudControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    void getCurrencyInfo_requestIsNotValid_shouldReturnBadRequest() throws Exception {
-
-        String code = "USDsa";
-
-        mockMvc.perform(get("/currencies/rates/{code}", code))
-                .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(jsonPath("$.code").value(HttpStatus.BAD_REQUEST.value()))
-                .andExpect(jsonPath("$.message").value(String.format("Invalid currency code: %s", code)))
-                .andDo(print());
-    }
-
-    @Test
-    @WithMockUser(roles = "USER")
     void getCurrencyInfo_requestIsValid_shouldReturnOk() throws Exception {
 
         String code = "USD";

@@ -4,8 +4,6 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.example.task8.exception.ValuteNotExistException;
 
-import java.util.Currency;
-
 
 public class CurrencyCodeValidator implements ConstraintValidator<ValidCurrency, String> {
 
@@ -16,8 +14,7 @@ public class CurrencyCodeValidator implements ConstraintValidator<ValidCurrency,
         }
 
         try {
-            Currency currency = Currency.getInstance(value);
-            return true; // Valid currency code
+            return true;
         } catch (IllegalArgumentException e) {
             throw new ValuteNotExistException("Invalid currency code: " + value);
         }

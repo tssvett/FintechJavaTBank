@@ -1,9 +1,8 @@
 package org.example.task10.dto;
 
 import jakarta.annotation.Nullable;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public record EventReadDto(
         @Nullable String name,

@@ -9,6 +9,8 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     jacoco
+    id("org.springframework.boot") version "3.3.4"
+    checkstyle
 }
 
 repositories {
@@ -16,11 +18,14 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = "10.20.1"
+    configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+}
+
 
 dependencies {
     implementation(project(":logtime"))
-
-    testImplementation(libs.junit.jupiter)
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.0")
@@ -33,8 +38,6 @@ dependencies {
     testImplementation("org.wiremock.integrations.testcontainers:wiremock-testcontainers-module:1.0-alpha-14")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    implementation(libs.guava)
 
     implementation("org.projectlombok:lombok:1.18.34")
     annotationProcessor("org.projectlombok:lombok:1.18.34")
@@ -121,6 +124,11 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+    }
 }
 
 tasks.named<Test>("test") {
@@ -134,6 +142,18 @@ tasks.withType<JacocoReport> {
             exclude("org/example/task3/**")
             exclude("org/example/task5/**")
             exclude("org/example/task8/dto/**")
+            exclude("org/example/task8/exception/**")
+            exclude("org/example/task9/dto/**")
+            exclude("org/example/task9/exception/**")
+            exclude("org/example/task10/dto/**")
+            exclude("org/example/task10/advice/**")
+            exclude("org/example/task12/advice/**")
+            exclude("org/example/task9/advice/**")
+            exclude("org/example/task8/advice/**")
+            exclude("org/example/task12/security/exceptions/**")
+            exclude("org/example/task12/entity/**")
+            exclude("org/example/task12/dto/**")
+            exclude("org/example/task10/exception/**")
         }
     )
 }

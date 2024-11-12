@@ -1,14 +1,13 @@
 package org.example.task8.currency.converter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task8.dto.CurrencyInfoDto;
 import org.example.task8.parser.xml.model.Valute;
 import org.example.task8.utils.numbers.BigDecimalCurrencyParser;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 @Slf4j
 @Component

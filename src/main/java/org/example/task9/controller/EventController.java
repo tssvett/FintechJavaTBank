@@ -2,6 +2,8 @@ package org.example.task9.controller;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.task10.dto.EventCreateDto;
@@ -23,9 +25,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Validated
 @RestController
 @RequiredArgsConstructor
@@ -37,8 +36,10 @@ public class EventController {
     @GetMapping("/api/v1/events")
     public List<ApiEvent> getEvents(@Valid @Positive @RequestParam Double budget,
                                     @Valid @ValidCurrency @RequestParam String currency,
-                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(required = false) LocalDate dateFrom,
-                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @RequestParam(required = false) LocalDate dateTo) {
+                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                    @RequestParam(required = false) LocalDate dateFrom,
+                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                    @RequestParam(required = false) LocalDate dateTo) {
         return eventService.getEventsReactive(budget, currency, dateFrom, dateTo).toFuture().get();
     }
 

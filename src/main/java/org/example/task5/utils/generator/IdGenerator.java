@@ -1,9 +1,8 @@
 package org.example.task5.utils.generator;
 
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.util.Random;
 
 @Component
 @RequiredArgsConstructor

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/test}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/fintech}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:123}
     driver-class-name: org.postgresql.Driver
@@ -53,7 +53,7 @@ rest:
 data-initialization:
   threads: 2
   period-seconds: 600
-  enable: true
+  enable: false
 
 security:
   jwt:

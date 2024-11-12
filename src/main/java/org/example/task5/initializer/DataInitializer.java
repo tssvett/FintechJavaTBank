@@ -1,6 +1,10 @@
 package org.example.task5.initializer;
 
 import jakarta.annotation.PreDestroy;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task10.service.crud.impl.PlaceCrudServiceImpl;
@@ -12,17 +16,7 @@ import org.example.task5.logtime.annotation.LogExecutionTime;
 import org.example.task5.model.ApiLocation;
 import org.example.task5.model.Category;
 import org.example.task5.repository.InMemoryRepository;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -77,7 +71,7 @@ public class DataInitializer implements Initializer {
             List<Category> categories = kudaGoServiceClient.getCategories();
             saveCategories(categories);
             log.info("Categories successfully initialized");
-          
+
             List<ApiLocation> locations = kudaGoServiceClient.getLocations();
             saveLocations(locations);
             log.info("Locations successfully initialized");
@@ -105,7 +99,7 @@ public class DataInitializer implements Initializer {
             Thread.currentThread().interrupt();
         }
     }
-  
+
     private void saveLocations(List<ApiLocation> locations) {
         for (ApiLocation location : locations) {
             locationMapRepository.save(location.slug(), location);

@@ -1,7 +1,7 @@
 package org.example.task5.config;
 
-import org.example.task5.model.Category;
 import org.example.task5.model.ApiLocation;
+import org.example.task5.model.Category;
 import org.example.task5.repository.InMemoryRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,8 @@
 package org.example.task8.integration;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task8.exception.ServiceUnavailableException;
@@ -13,9 +15,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -35,7 +34,8 @@ public class CurrencyRateServiceClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
                     log.error("Error response: {}", clientResponse.statusCode());
-                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: " + clientResponse.statusCode()));
+                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: "
+                            + clientResponse.statusCode()));
                 })
                 .bodyToMono(String.class)
                 .map(xmlParser::parse)
@@ -52,7 +52,8 @@ public class CurrencyRateServiceClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
                     log.error("Error response: {}", clientResponse.statusCode());
-                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: " + clientResponse.statusCode()));
+                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: "
+                            + clientResponse.statusCode()));
                 })
                 .bodyToMono(String.class)
                 .map(xmlParser::parse)
@@ -69,7 +70,8 @@ public class CurrencyRateServiceClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
                     log.error("Error response: {}", clientResponse.statusCode());
-                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: " + clientResponse.statusCode()));
+                    return Mono.error(new ServiceUnavailableException("Failed to fetch currencies: "
+                            + clientResponse.statusCode()));
                 })
                 .bodyToMono(String.class)
                 .map(xmlParser::parse)

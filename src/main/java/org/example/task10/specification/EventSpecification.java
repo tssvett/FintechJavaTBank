@@ -2,15 +2,14 @@ package org.example.task10.specification;
 
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.example.task10.entity.Event;
 import org.example.task10.entity.Place;
 import org.example.task10.specification.criteria.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Component
 public class EventSpecification {

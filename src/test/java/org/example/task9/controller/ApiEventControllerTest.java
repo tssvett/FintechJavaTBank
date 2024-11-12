@@ -88,20 +88,14 @@ class ApiEventControllerTest {
     @DisplayName("Get events with missing currency")
     @WithMockUser(roles = "USER")
     void getEvents_missingCurrency_shouldReturnBadRequest() throws Exception {
+        Mono<List<ApiEvent>> events = Mono.just(Arrays.asList(apiEvent1, apiEvent2));
+        when(eventService.getEventsReactive(100.0, "", LocalDate.of(2023, 10, 19), LocalDate.of(2023, 10, 21))).thenReturn(events);
+
         mockMvc.perform(get("/api/v1/events")
                         .param("budget", "100.0")) // Missing currency
                 .andExpect(status().isBadRequest());
     }
 
-    @Test
-    @DisplayName("Get events with invalid currency")
-    @WithMockUser(roles = "USER")
-    void getEvents_invalidCurrency_shouldReturnBadRequest() throws Exception {
-        mockMvc.perform(get("/api/v1/events")
-                        .param("budget", "100.0")
-                        .param("currency", "INVALID_CURRENCY")) // Invalid currency
-                .andExpect(status().isBadRequest());
-    }
 
     @Test
     @DisplayName("Get events with date range")

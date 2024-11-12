@@ -1,10 +1,13 @@
 package org.example.task5.integration;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task5.exception.KudaGoException;
-import org.example.task5.model.Category;
 import org.example.task5.model.ApiLocation;
+import org.example.task5.model.Category;
 import org.example.task5.properties.KudaGoProperties;
 import org.example.task9.dto.EventResponse;
 import org.example.task9.model.ApiEvent;
@@ -13,10 +16,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Component
@@ -32,7 +31,8 @@ public class KudaGoServiceClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, clientResponse -> {
                     log.error("Error response: {}", clientResponse.statusCode());
-                    return Mono.error(new KudaGoException("Failed to fetch categories: " + clientResponse.statusCode()));
+                    return Mono.error(new KudaGoException("Failed to fetch categories: "
+                            + clientResponse.statusCode()));
                 })
                 .bodyToMono(new ParameterizedTypeReference<List<Category>>() {
                 })

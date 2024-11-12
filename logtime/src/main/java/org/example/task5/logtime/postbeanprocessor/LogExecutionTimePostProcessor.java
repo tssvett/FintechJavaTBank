@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Slf4j
 public class LogExecutionTimePostProcessor implements BeanPostProcessor {
-    private Map<String, Class> map = new HashMap<>();
+    private final Map<String, Class> map = new HashMap<>();
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

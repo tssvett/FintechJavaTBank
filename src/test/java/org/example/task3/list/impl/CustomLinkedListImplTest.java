@@ -4,6 +4,7 @@ package org.example.task3.list.impl;
 
 import org.example.task3.iterator.CustomLinkedIterator;
 import org.example.task3.list.CustomLinkedList;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +37,7 @@ class CustomLinkedListImplTest {
     @Test
     void testAddNull(){
         list.add(null);
-        assertEquals(null, list.get(0));
+        assertNull(list.get(0));
     }
 
     @Test

@@ -1,10 +1,9 @@
 package org.example.task11.pattern.mementopattern.catetaker;
 
-import org.example.task11.pattern.mementopattern.memento.LocationMemento;
-import org.springframework.stereotype.Component;
-
 import java.util.Deque;
 import java.util.LinkedList;
+import org.example.task11.pattern.mementopattern.memento.LocationMemento;
+import org.springframework.stereotype.Component;
 
 @Component
 public class LocationHistory implements Caretaker<LocationMemento> {

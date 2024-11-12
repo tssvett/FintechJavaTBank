@@ -4,15 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import java.util.Date;
+import java.util.Optional;
+import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
 import org.example.task12.properties.JwtProperties;
 import org.example.task12.security.exceptions.JwtTokenNotFoundException;
 import org.example.task12.security.repository.JwtRepository;
 import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
