@@ -45,6 +45,7 @@ jobs:
         run: ./gradlew checkstyleMain
 
       - name: Add coverage to PR
+        id: jacoco
         uses: madrapps/jacoco-report@v1.7.1
         with:
           paths: ${{ github.workspace }}/build/reports/jacocoReports/test/jacocoTestReport.xml,
