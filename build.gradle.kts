@@ -11,6 +11,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.3.4"
     checkstyle
+    id("me.champeau.jmh") version "0.7.2"
 }
 
 repositories {
@@ -68,7 +69,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.3.4")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
-    
+
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.3.4")
 
@@ -83,7 +84,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.18.0")
-    
+
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation("org.springframework.boot:spring-boot-starter-security:3.3.5")
 
@@ -97,6 +98,18 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.testcontainers/postgresql
     testImplementation("org.testcontainers:postgresql:1.20.3")
+
+    // https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
+    testImplementation("org.openjdk.jmh:jmh-core:1.37")
+    testAnnotationProcessor("org.openjdk.jmh:jmh-generator-annprocess:1.37")
+
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+    implementation("org.springframework.amqp:spring-rabbit:3.1.7")
+
+    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
+    implementation("org.springframework.kafka:spring-kafka:3.2.4")
+
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
