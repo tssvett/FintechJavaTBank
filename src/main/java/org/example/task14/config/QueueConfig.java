@@ -15,7 +15,9 @@ public class RabbitConfiguration {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory("localhost");
+        CachingConnectionFactory factory = new CachingConnectionFactory("localhost");
+        factory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.SIMPLE);
+        return factory;
     }
 
     @Bean
