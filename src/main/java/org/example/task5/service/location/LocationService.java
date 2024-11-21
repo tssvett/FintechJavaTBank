@@ -1,5 +1,6 @@
 package org.example.task5.service.location;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task11.pattern.mementopattern.catetaker.LocationHistory;
@@ -13,8 +14,6 @@ import org.example.task5.repository.InMemoryRepository;
 import org.example.task5.service.KudaGoService;
 import org.example.task5.utils.mapping.Mapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -37,14 +36,15 @@ public class LocationService implements KudaGoService<String, ApiLocation, Locat
 
     @Override
     public ApiLocation create(LocationCreateDto locationCreateDto) {
-        return inMemoryRepository.save(locationCreateDto.slug(), Mapper.toLocation(locationCreateDto)); // Предполагаем, что slug уникален
+        return inMemoryRepository.save(locationCreateDto.slug(),
+                Mapper.toLocation(locationCreateDto));
     }
 
     @Override
     public ApiLocation update(String id, LocationUpdateDto locationUpdateDto) {
         ApiLocation location = this.getById(id);
         locationHistory.addMemento(new LocationMemento(location.slug(), location.name()));
-      
+
         return inMemoryRepository.update(id, Mapper.toLocation(locationUpdateDto))
                 .orElseThrow(() -> new LocationNotExistException("Location with id " + id + " does not exist"));
     }

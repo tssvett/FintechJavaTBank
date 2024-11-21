@@ -1,7 +1,6 @@
 package org.example.task9.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +13,9 @@ public record Event(Long id,
     private static final Pattern PRICE_PATTERN = Pattern.compile("\\d+(?:\\s?\\d+)*");
 
     public boolean isFitsBudget(BigDecimal budget) {
-        if (isFree) return true;
+        if (isFree) {
+            return true;
+        }
 
         if (price == null || price.isEmpty()) {
             return false;

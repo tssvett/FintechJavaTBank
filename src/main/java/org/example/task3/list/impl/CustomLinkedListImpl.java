@@ -1,10 +1,9 @@
 package org.example.task3.list.impl;
 
 
+import java.util.function.Consumer;
 import org.example.task3.iterator.CustomLinkedIterator;
 import org.example.task3.list.CustomLinkedList;
-
-import java.util.function.Consumer;
 
 public class CustomLinkedListImpl<T> implements CustomLinkedList<T> {
     private Node<T> head;

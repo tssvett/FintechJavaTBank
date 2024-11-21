@@ -1,5 +1,6 @@
 package org.example.task5.controller.location;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task5.controller.CrudController;
@@ -18,14 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 
 @Slf4j
 @RestController
 @RequestMapping("api/v1/locations")
 @RequiredArgsConstructor
-public class LocationCrudController implements CrudController<String, ApiLocation, LocationCreateDto, LocationUpdateDto> {
+public class LocationCrudController
+        implements CrudController<String, ApiLocation, LocationCreateDto, LocationUpdateDto> {
     private final KudaGoService<String, ApiLocation, LocationCreateDto, LocationUpdateDto> locationService;
 
     @Override

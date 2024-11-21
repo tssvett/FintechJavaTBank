@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/fintech}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/test}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:123}
     driver-class-name: org.postgresql.Driver

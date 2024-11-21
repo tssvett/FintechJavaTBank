@@ -1,11 +1,10 @@
 package org.example.task5.config;
 
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.example.task5.properties.DataInitializationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.Duration;
 
 @Configuration
 @RequiredArgsConstructor

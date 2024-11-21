@@ -2,10 +2,9 @@ package org.example.task10.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.util.UUID;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public record EventUpdateDto(
         @NotNull(message = "eventIdToUpdate cannot be null") Long eventIdToUpdate,

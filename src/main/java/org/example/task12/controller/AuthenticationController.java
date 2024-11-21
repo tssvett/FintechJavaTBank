@@ -38,7 +38,8 @@ public class AuthenticationController {
 
     @PostMapping("api/v1/auth/change-password")
     @ResponseStatus(HttpStatus.OK)
-    public void changePassword(@RequestBody ChangePasswordRequest request, @RequestHeader("Authorization") String token) {
+    public void changePassword(@RequestBody ChangePasswordRequest request,
+                               @RequestHeader("Authorization") String token) {
         authenticationService.changePassword(request, token);
     }
 

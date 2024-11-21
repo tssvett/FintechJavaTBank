@@ -1,5 +1,11 @@
 package org.example.task10.service.crud.impl;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TimeZone;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task10.entity.Event;
@@ -12,13 +18,6 @@ import org.example.task5.integration.KudaGoServiceClient;
 import org.example.task5.model.ApiLocation;
 import org.example.task9.model.ApiEvent;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.UUID;
 
 @Slf4j
 @Service

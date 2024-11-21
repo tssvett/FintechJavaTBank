@@ -1,15 +1,14 @@
 package org.example.task12.security.service;
 
 import io.jsonwebtoken.Jwts;
+import java.time.Duration;
+import java.util.Date;
+import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import org.example.task12.entity.ApiUser;
 import org.example.task12.properties.JwtProperties;
 import org.example.task12.security.utils.JwtExtractUtils;
 import org.springframework.stereotype.Service;
-
-import java.time.Duration;
-import java.util.Date;
-import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +32,9 @@ public class JwtService {
     }
 
     private Date getExpiration(boolean rememberMe) {
-        Duration expirationTime = rememberMe ? jwtProperties.getRememberMeExpiration() : jwtProperties.getDefaultExpiration();
+        Duration expirationTime = rememberMe
+                ? jwtProperties.getRememberMeExpiration()
+                : jwtProperties.getDefaultExpiration();
 
         return new Date(System.currentTimeMillis() + expirationTime.toMillis());
     }

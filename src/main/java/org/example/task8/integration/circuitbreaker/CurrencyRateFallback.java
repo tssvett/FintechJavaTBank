@@ -1,11 +1,10 @@
 package org.example.task8.integration.circuitbreaker;
 
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task8.exception.ServiceUnavailableException;
 import org.example.task8.parser.xml.model.Valute;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Slf4j
 @Component

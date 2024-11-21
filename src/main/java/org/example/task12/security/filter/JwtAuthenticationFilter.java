@@ -1,11 +1,11 @@
 package org.example.task12.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.net.HttpHeaders;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.task12.entity.ApiUser;
@@ -23,8 +23,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -39,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+            String authorizationHeader = request.getHeader("Authorization");
 
             if (isContainsJwtToken(authorizationHeader)) {
 
@@ -91,8 +89,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return header != null && header.startsWith(BEARER);
     }
 
-    private static UsernamePasswordAuthenticationToken createAuthenticationToken(HttpServletRequest request, ApiUser user) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+    private static UsernamePasswordAuthenticationToken createAuthenticationToken(
+            HttpServletRequest request, ApiUser user
+    ) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user,
+                null, user.getAuthorities());
         token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
         return token;

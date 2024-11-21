@@ -1,5 +1,6 @@
 package org.example.task5.integration;
 
+import lombok.SneakyThrows;
 import org.example.task5.model.Category;
 import org.example.task5.model.ApiLocation;
 import org.junit.jupiter.api.Assertions;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.wiremock.integrations.testcontainers.WireMockContainer;
@@ -23,6 +25,17 @@ class KudaGoServiceClientIT {
             .withMappingFromResource("place-categories", KudaGoServiceClientIT.class, "categories.json")
             .withMappingFromResource("locations", KudaGoServiceClientIT.class, "locations.json");
 
+    private static final PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17")
+            .withUsername("postgres")
+            .withPassword("123")
+            .withDatabaseName("test");
+
+    @SneakyThrows
+    @DynamicPropertySource
+    static void postgresqlProperties(DynamicPropertyRegistry registry) {
+        postgres.start();
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+    }
 
     @Autowired
     private KudaGoServiceClient kudaGoServiceClient;
