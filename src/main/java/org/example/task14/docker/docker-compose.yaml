@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"      # RabbitMQ client port
+      - "15672:15672"    # RabbitMQ management UI
+    networks:
+      - messaging
+
+  zookeeper:
+    image: zookeeper:latest
+    restart: "no"
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: nc -z 127.0.0.1 2181 || exit -1
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+    networks:
+      - messaging
+
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+    ports:
+      - "9092:9092"      # Kafka client port
+    depends_on:
+      - zookeeper
+    networks:
+      - messaging
+
+networks:
+  messaging:
