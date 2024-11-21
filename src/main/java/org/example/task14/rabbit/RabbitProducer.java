@@ -20,6 +20,7 @@ public class RabbitProducer implements QueueProducer {
 
     @Override
     public void stopProducer() {
+        rabbitTemplate.getConnectionFactory().resetConnection();
         rabbitTemplate.destroy();
         log.info("Producer stopped");
     }

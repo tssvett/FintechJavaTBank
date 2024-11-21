@@ -8,56 +8,309 @@
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigThroughput
+
+# Run progress: 0.00% complete, ETA 00:58:30
+# Fork: 1 of 1
+# Warmup Iteration   1: 731851710.438 ops/s
+# Warmup Iteration   2: 744679327.221 ops/s
+# Warmup Iteration   3: 647010649.727 ops/s
+Iteration   1: 590224042.283 ops/s
+Iteration   2: 248607491.911 ops/s
+Iteration   3: 236895011.785 ops/s
+Iteration   4: 476960156.900 ops/s
+Iteration   5: 515685755.715 ops/s
+Iteration   6: 243029376.692 ops/s
+Iteration   7: 359628592.071 ops/s
+Iteration   8: 518948962.369 ops/s
+Iteration   9: 663139531.101 ops/s
+Iteration  10: 573747781.283 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigThroughput":
+  442686670.211 ±(99.9%) 239916211.956 ops/s [Average]
+  (min, avg, max) = (236895011.785, 442686670.211, 663139531.101), stdev = 158689719.535
+  CI (99.9%): [202770458.255, 682602882.167] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigThroughput
+
+# Run progress: 3.70% complete, ETA 00:57:07
+# Fork: 1 of 1
+# Warmup Iteration   1: 207.035 ops/s
+# Warmup Iteration   2: 228.775 ops/s
+# Warmup Iteration   3: 285.241 ops/s
+Iteration   1: 217.793 ops/s
+Iteration   2: 274.917 ops/s
+Iteration   3: 267.536 ops/s
+Iteration   4: 177.306 ops/s
+Iteration   5: 386.977 ops/s
+Iteration   6: 404.993 ops/s
+Iteration   7: 402.279 ops/s
+Iteration   8: 409.824 ops/s
+Iteration   9: 401.025 ops/s
+Iteration  10: 373.484 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigThroughput":
+  331.613 ±(99.9%) 133.540 ops/s [Average]
+  (min, avg, max) = (177.306, 331.613, 409.824), stdev = 88.329
+  CI (99.9%): [198.073, 465.154] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigThroughput
+
+# Run progress: 7.41% complete, ETA 00:54:58
+# Fork: 1 of 1
+# Warmup Iteration   1: 734038811.006 ops/s
+# Warmup Iteration   2: 738633430.546 ops/s
+# Warmup Iteration   3: 743899513.717 ops/s
+Iteration   1: 664012016.362 ops/s
+Iteration   2: 605376470.102 ops/s
+Iteration   3: 670318685.783 ops/s
+Iteration   4: 681329632.544 ops/s
+Iteration   5: 637098433.851 ops/s
+Iteration   6: 662878243.592 ops/s
+Iteration   7: 667852874.250 ops/s
+Iteration   8: 601195590.840 ops/s
+Iteration   9: 640233750.096 ops/s
+Iteration  10: 621686812.977 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigThroughput":
+  645198251.040 ±(99.9%) 43002631.315 ops/s [Average]
+  (min, avg, max) = (601195590.840, 645198251.040, 681329632.544), stdev = 28443578.060
+  CI (99.9%): [602195619.725, 688200882.355] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigThroughput
+
+# Run progress: 11.11% complete, ETA 00:52:46
+# Fork: 1 of 1
+# Warmup Iteration   1: 813.726 ops/s
+# Warmup Iteration   2: 912.726 ops/s
+# Warmup Iteration   3: 934.265 ops/s
+Iteration   1: 819.732 ops/s
+Iteration   2: 856.990 ops/s
+Iteration   3: 794.868 ops/s
+Iteration   4: 942.268 ops/s
+Iteration   5: 818.317 ops/s
+Iteration   6: 917.823 ops/s
+Iteration   7: 927.275 ops/s
+Iteration   8: 947.562 ops/s
+Iteration   9: 844.978 ops/s
+Iteration  10: 930.356 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigThroughput":
+  880.017 ±(99.9%) 88.850 ops/s [Average]
+  (min, avg, max) = (794.868, 880.017, 947.562), stdev = 58.768
+  CI (99.9%): [791.167, 968.866] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigThroughput
+
+# Run progress: 14.81% complete, ETA 00:50:38
+# Fork: 1 of 1
+# Warmup Iteration   1: 235.000 ops/s
+# Warmup Iteration   2: 338.379 ops/s
+# Warmup Iteration   3: 330.212 ops/s
+Iteration   1: 332.424 ops/s
+Iteration   2: 356.043 ops/s
+Iteration   3: 232.709 ops/s
+Iteration   4: 84.223 ops/s
+Iteration   5: 394.798 ops/s
+Iteration   6: 454.133 ops/s
+Iteration   7: 333.807 ops/s
+Iteration   8: 427.663 ops/s
+Iteration   9: 281.277 ops/s
+Iteration  10: 409.144 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigThroughput":
+  330.622 ±(99.9%) 165.884 ops/s [Average]
+  (min, avg, max) = (84.223, 330.622, 454.133), stdev = 109.722
+  CI (99.9%): [164.738, 496.506] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigThroughput
+
+# Run progress: 18.52% complete, ETA 00:48:25
+# Fork: 1 of 1
+# Warmup Iteration   1: 722478802.056 ops/s
+# Warmup Iteration   2: 650179500.756 ops/s
+# Warmup Iteration   3: 584244023.824 ops/s
+Iteration   1: 267496862.393 ops/s
+Iteration   2: 676123452.975 ops/s
+Iteration   3: 696433169.319 ops/s
+Iteration   4: 737015014.521 ops/s
+Iteration   5: 736554319.614 ops/s
+Iteration   6: 734623293.107 ops/s
+Iteration   7: 740921544.352 ops/s
+Iteration   8: 728723927.675 ops/s
+Iteration   9: 731364828.651 ops/s
+Iteration  10: 746704632.579 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigThroughput":
+  679596104.519 ±(99.9%) 221422959.935 ops/s [Average]
+  (min, avg, max) = (267496862.393, 679596104.519, 746704632.579), stdev = 146457578.353
+  CI (99.9%): [458173144.583, 901019064.454] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
 # Benchmark: org.example.jmh.SimpleBenchmark.simpleRabbitThroughput
 
-# Run progress: 0.00% complete, ETA 00:04:20
+# Run progress: 22.22% complete, ETA 00:46:12
 # Fork: 1 of 1
-# Warmup Iteration   1: <failure>
-
-org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: no further information
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:726)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:257)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2249)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.send(RabbitTemplate.java:1122)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.convertAndSend(RabbitTemplate.java:1188)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.convertAndSend(RabbitTemplate.java:1169)
-	at org.example.task14.rabbit.RabbitProducer.produceMessage(RabbitProducer.java:18)
-	at org.example.task14.queueconfiguraion.QueueConfiguration.lambda$run$0(QueueConfiguration.java:14)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.example.task14.queueconfiguraion.QueueConfiguration.run(QueueConfiguration.java:14)
-	at org.example.jmh.SimpleBenchmark.simpleRabbitThroughput(SimpleBenchmark.java:57)
-	at org.example.jmh.jmh_generated.SimpleBenchmark_simpleRabbitThroughput_jmhTest.simpleRabbitThroughput_thrpt_jmhStub(SimpleBenchmark_simpleRabbitThroughput_jmhTest.java:145)
-	at org.example.jmh.jmh_generated.SimpleBenchmark_simpleRabbitThroughput_jmhTest.simpleRabbitThroughput_Throughput(SimpleBenchmark_simpleRabbitThroughput_jmhTest.java:84)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:527)
-	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:504)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-Caused by: java.net.ConnectException: Connection refused: no further information
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:61)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1249)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1369)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectHostPort(AbstractConnectionFactory.java:685)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584)
-	... 24 more
+# Warmup Iteration   1: 1119.749 ops/s
+# Warmup Iteration   2: 1230.059 ops/s
+# Warmup Iteration   3: 1236.984 ops/s
+Iteration   1: 1045.390 ops/s
+Iteration   2: 1043.739 ops/s
+Iteration   3: 1185.768 ops/s
+Iteration   4: 1199.968 ops/s
+Iteration   5: 1184.846 ops/s
+Iteration   6: 1220.225 ops/s
+Iteration   7: 1179.783 ops/s
+Iteration   8: 1205.107 ops/s
+Iteration   9: 1207.969 ops/s
+Iteration  10: 1107.525 ops/s
 
 
+Result "org.example.jmh.SimpleBenchmark.simpleRabbitThroughput":
+  1158.032 ±(99.9%) 101.543 ops/s [Average]
+  (min, avg, max) = (1043.739, 1158.032, 1220.225), stdev = 67.164
+  CI (99.9%): [1056.489, 1259.575] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestKafkaConfigThroughput
+
+# Run progress: 25.93% complete, ETA 00:43:59
+# Fork: 1 of 1
+# Warmup Iteration   1: 734267550.536 ops/s
+# Warmup Iteration   2: 739042995.696 ops/s
+# Warmup Iteration   3: 745549694.036 ops/s
+Iteration   1: 750954032.892 ops/s
+Iteration   2: 743962253.649 ops/s
+Iteration   3: 749585995.452 ops/s
+Iteration   4: 741866967.443 ops/s
+Iteration   5: 744742473.826 ops/s
+Iteration   6: 747564767.737 ops/s
+Iteration   7: 752530038.432 ops/s
+Iteration   8: 757036878.074 ops/s
+Iteration   9: 750053023.609 ops/s
+Iteration  10: 743900259.353 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestKafkaConfigThroughput":
+  748219669.047 ±(99.9%) 7103526.042 ops/s [Average]
+  (min, avg, max) = (741866967.443, 748219669.047, 757036878.074), stdev = 4698542.654
+  CI (99.9%): [741116143.005, 755323195.089] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestRabbitConfigThroughput
+
+# Run progress: 29.63% complete, ETA 00:41:46
+# Fork: 1 of 1
+# Warmup Iteration   1: 127.200 ops/s
+# Warmup Iteration   2: 138.286 ops/s
+# Warmup Iteration   3: 147.604 ops/s
+Iteration   1: 135.649 ops/s
+Iteration   2: 139.864 ops/s
+Iteration   3: 149.139 ops/s
+Iteration   4: 146.330 ops/s
+Iteration   5: 149.543 ops/s
+Iteration   6: 149.561 ops/s
+Iteration   7: 149.137 ops/s
+Iteration   8: 146.533 ops/s
+Iteration   9: 148.111 ops/s
+Iteration  10: 148.742 ops/s
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestRabbitConfigThroughput":
+  146.261 ±(99.9%) 7.152 ops/s [Average]
+  (min, avg, max) = (135.649, 146.261, 149.561), stdev = 4.731
+  CI (99.9%): [139.109, 153.413] (assumes normal distribution)
 
 
 # JMH version: 1.37
@@ -70,59 +323,611 @@ Caused by: java.net.ConnectException: Connection refused: no further information
 # Timeout: 10 min per iteration
 # Threads: 1 thread, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: org.example.jmh.SimpleBenchmark.simpleRabbitAverageTime
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigConsumerLatency
 
-# Run progress: 50.00% complete, ETA 00:00:01
+# Run progress: 33.33% complete, ETA 00:39:33
 # Fork: 1 of 1
-# Warmup Iteration   1: <failure>
-
-org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: no further information
-	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622)
-	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:726)
-	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:257)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2249)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.send(RabbitTemplate.java:1122)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.convertAndSend(RabbitTemplate.java:1188)
-	at org.springframework.amqp.rabbit.core.RabbitTemplate.convertAndSend(RabbitTemplate.java:1169)
-	at org.example.task14.rabbit.RabbitProducer.produceMessage(RabbitProducer.java:18)
-	at org.example.task14.queueconfiguraion.QueueConfiguration.lambda$run$0(QueueConfiguration.java:14)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.example.task14.queueconfiguraion.QueueConfiguration.run(QueueConfiguration.java:14)
-	at org.example.jmh.SimpleBenchmark.simpleRabbitAverageTime(SimpleBenchmark.java:47)
-	at org.example.jmh.jmh_generated.SimpleBenchmark_simpleRabbitAverageTime_jmhTest.simpleRabbitAverageTime_avgt_jmhStub(SimpleBenchmark_simpleRabbitAverageTime_jmhTest.java:238)
-	at org.example.jmh.jmh_generated.SimpleBenchmark_simpleRabbitAverageTime_jmhTest.simpleRabbitAverageTime_AverageTime(SimpleBenchmark_simpleRabbitAverageTime_jmhTest.java:177)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:527)
-	at org.openjdk.jmh.runner.BenchmarkHandler$BenchmarkTask.call(BenchmarkHandler.java:504)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
-	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
-Caused by: java.net.ConnectException: Connection refused: no further information
-	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
-	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:682)
-	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
-	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:592)
-	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
-	at java.base/java.net.Socket.connect(Socket.java:751)
-	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:61)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1249)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198)
-	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1369)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectHostPort(AbstractConnectionFactory.java:685)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:640)
-	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584)
-	... 24 more
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
 
 
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigConsumerLatency":
+  ? 10?? ms/op
 
 
-# Run complete. Total time: 00:00:02
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigProducerLatency
+
+# Run progress: 37.04% complete, ETA 00:37:21
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigProducerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigConsumerLatency
+
+# Run progress: 40.74% complete, ETA 00:35:08
+# Fork: 1 of 1
+# Warmup Iteration   1: 1.919 ms/op
+# Warmup Iteration   2: 1.811 ms/op
+# Warmup Iteration   3: 1.809 ms/op
+Iteration   1: 1.794 ms/op
+Iteration   2: 1.793 ms/op
+Iteration   3: 1.789 ms/op
+Iteration   4: 1.793 ms/op
+Iteration   5: 1.816 ms/op
+Iteration   6: 2.129 ms/op
+Iteration   7: 2.793 ms/op
+Iteration   8: 1.705 ms/op
+Iteration   9: 1.710 ms/op
+Iteration  10: 1.689 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigConsumerLatency":
+  1.901 ±(99.9%) 0.510 ms/op [Average]
+  (min, avg, max) = (1.689, 1.901, 2.793), stdev = 0.337
+  CI (99.9%): [1.391, 2.411] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigProducerLatency
+
+# Run progress: 44.44% complete, ETA 00:32:56
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.103 ms/op
+# Warmup Iteration   2: 0.067 ms/op
+# Warmup Iteration   3: 0.091 ms/op
+Iteration   1: 0.104 ms/op
+Iteration   2: 0.059 ms/op
+Iteration   3: 0.061 ms/op
+Iteration   4: 0.062 ms/op
+Iteration   5: 0.070 ms/op
+Iteration   6: 0.060 ms/op
+Iteration   7: 0.058 ms/op
+Iteration   8: 0.066 ms/op
+Iteration   9: 0.058 ms/op
+Iteration  10: 0.062 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigProducerLatency":
+  0.066 ±(99.9%) 0.021 ms/op [Average]
+  (min, avg, max) = (0.058, 0.066, 0.104), stdev = 0.014
+  CI (99.9%): [0.045, 0.087] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigConsumerLatency
+
+# Run progress: 48.15% complete, ETA 00:30:48
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigConsumerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigProducerLatency
+
+# Run progress: 51.85% complete, ETA 00:28:36
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingKafkaConfigProducerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigConsumerLatency
+
+# Run progress: 55.56% complete, ETA 00:26:23
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.682 ms/op
+# Warmup Iteration   2: 0.616 ms/op
+# Warmup Iteration   3: 0.603 ms/op
+Iteration   1: 0.603 ms/op
+Iteration   2: 0.603 ms/op
+Iteration   3: 0.606 ms/op
+Iteration   4: 0.601 ms/op
+Iteration   5: 0.606 ms/op
+Iteration   6: 0.613 ms/op
+Iteration   7: 0.597 ms/op
+Iteration   8: 0.605 ms/op
+Iteration   9: 0.600 ms/op
+Iteration  10: 0.594 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigConsumerLatency":
+  0.603 ±(99.9%) 0.008 ms/op [Average]
+  (min, avg, max) = (0.594, 0.603, 0.613), stdev = 0.005
+  CI (99.9%): [0.595, 0.611] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigProducerLatency
+
+# Run progress: 59.26% complete, ETA 00:24:11
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.092 ms/op
+# Warmup Iteration   2: 0.160 ms/op
+# Warmup Iteration   3: 0.092 ms/op
+Iteration   1: 0.059 ms/op
+Iteration   2: 0.057 ms/op
+Iteration   3: 0.059 ms/op
+Iteration   4: 0.063 ms/op
+Iteration   5: 0.063 ms/op
+Iteration   6: 0.064 ms/op
+Iteration   7: 0.069 ms/op
+Iteration   8: 0.064 ms/op
+Iteration   9: 0.069 ms/op
+Iteration  10: 0.066 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.loadBalancingRabbitConfigProducerLatency":
+  0.063 ±(99.9%) 0.006 ms/op [Average]
+  (min, avg, max) = (0.057, 0.063, 0.069), stdev = 0.004
+  CI (99.9%): [0.057, 0.070] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigConsumerLatency
+
+# Run progress: 62.96% complete, ETA 00:22:00
+# Fork: 1 of 1
+# Warmup Iteration   1: 2.070 ms/op
+# Warmup Iteration   2: 2.139 ms/op
+# Warmup Iteration   3: 1.831 ms/op
+Iteration   1: 1.810 ms/op
+Iteration   2: 1.825 ms/op
+Iteration   3: 1.881 ms/op
+Iteration   4: 1.817 ms/op
+Iteration   5: 1.805 ms/op
+Iteration   6: 1.812 ms/op
+Iteration   7: 1.867 ms/op
+Iteration   8: 1.916 ms/op
+Iteration   9: 1.802 ms/op
+Iteration  10: 1.864 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigConsumerLatency":
+  1.840 ±(99.9%) 0.059 ms/op [Average]
+  (min, avg, max) = (1.802, 1.840, 1.916), stdev = 0.039
+  CI (99.9%): [1.780, 1.899] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigProducerLatency
+
+# Run progress: 66.67% complete, ETA 00:19:48
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.033 ms/op
+# Warmup Iteration   2: 0.028 ms/op
+# Warmup Iteration   3: 0.022 ms/op
+Iteration   1: 0.020 ms/op
+Iteration   2: 0.019 ms/op
+Iteration   3: 0.020 ms/op
+Iteration   4: 0.022 ms/op
+Iteration   5: 0.030 ms/op
+Iteration   6: 0.022 ms/op
+Iteration   7: 0.023 ms/op
+Iteration   8: 0.021 ms/op
+Iteration   9: 0.029 ms/op
+Iteration  10: 0.072 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersRabbitConfigProducerLatency":
+  0.028 ±(99.9%) 0.024 ms/op [Average]
+  (min, avg, max) = (0.019, 0.028, 0.072), stdev = 0.016
+  CI (99.9%): [0.004, 0.052] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigConsumerLatency
+
+# Run progress: 70.37% complete, ETA 00:17:39
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigConsumerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigProducerLatency
+
+# Run progress: 74.07% complete, ETA 00:15:26
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.multipleConsumersStressTestRabbitConfigProducerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.simpleRabbitConsumerLatency
+
+# Run progress: 77.78% complete, ETA 00:13:14
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.666 ms/op
+# Warmup Iteration   2: 0.607 ms/op
+# Warmup Iteration   3: 0.602 ms/op
+Iteration   1: 0.595 ms/op
+Iteration   2: 0.598 ms/op
+Iteration   3: 0.598 ms/op
+Iteration   4: 0.596 ms/op
+Iteration   5: 0.598 ms/op
+Iteration   6: 0.596 ms/op
+Iteration   7: 0.597 ms/op
+Iteration   8: 0.596 ms/op
+Iteration   9: 0.614 ms/op
+Iteration  10: 0.596 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.simpleRabbitConsumerLatency":
+  0.598 ±(99.9%) 0.008 ms/op [Average]
+  (min, avg, max) = (0.595, 0.598, 0.614), stdev = 0.006
+  CI (99.9%): [0.590, 0.607] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.simpleRabbitProducerLatency
+
+# Run progress: 81.48% complete, ETA 00:11:01
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.031 ms/op
+# Warmup Iteration   2: 0.024 ms/op
+# Warmup Iteration   3: 0.021 ms/op
+Iteration   1: 0.020 ms/op
+Iteration   2: 0.020 ms/op
+Iteration   3: 0.021 ms/op
+Iteration   4: 0.020 ms/op
+Iteration   5: 0.020 ms/op
+Iteration   6: 0.020 ms/op
+Iteration   7: 0.023 ms/op
+Iteration   8: 0.033 ms/op
+Iteration   9: 0.022 ms/op
+Iteration  10: 0.019 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.simpleRabbitProducerLatency":
+  0.022 ±(99.9%) 0.006 ms/op [Average]
+  (min, avg, max) = (0.019, 0.022, 0.033), stdev = 0.004
+  CI (99.9%): [0.016, 0.028] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestKafkaConfigConsumerLatency
+
+# Run progress: 85.19% complete, ETA 00:08:49
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestKafkaConfigConsumerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestKafkaConfigProducerLatency
+
+# Run progress: 88.89% complete, ETA 00:06:37
+# Fork: 1 of 1
+# Warmup Iteration   1: ? 10?? ms/op
+# Warmup Iteration   2: ? 10?? ms/op
+# Warmup Iteration   3: ? 10?? ms/op
+Iteration   1: ? 10?? ms/op
+Iteration   2: ? 10?? ms/op
+Iteration   3: ? 10?? ms/op
+Iteration   4: ? 10?? ms/op
+Iteration   5: ? 10?? ms/op
+Iteration   6: ? 10?? ms/op
+Iteration   7: ? 10?? ms/op
+Iteration   8: ? 10?? ms/op
+Iteration   9: ? 10?? ms/op
+Iteration  10: ? 10?? ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestKafkaConfigProducerLatency":
+  ? 10?? ms/op
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestRabbitConfigConsumerLatency
+
+# Run progress: 92.59% complete, ETA 00:04:24
+# Fork: 1 of 1
+# Warmup Iteration   1: 6.482 ms/op
+# Warmup Iteration   2: 5.987 ms/op
+# Warmup Iteration   3: 5.975 ms/op
+Iteration   1: 5.965 ms/op
+Iteration   2: 5.969 ms/op
+Iteration   3: 6.027 ms/op
+Iteration   4: 5.947 ms/op
+Iteration   5: 6.033 ms/op
+Iteration   6: 7.586 ms/op
+Iteration   7: 6.119 ms/op
+Iteration   8: 5.985 ms/op
+Iteration   9: 5.924 ms/op
+Iteration  10: 7.847 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestRabbitConfigConsumerLatency":
+  6.340 ±(99.9%) 1.103 ms/op [Average]
+  (min, avg, max) = (5.924, 6.340, 7.847), stdev = 0.730
+  CI (99.9%): [5.237, 7.444] (assumes normal distribution)
+
+
+# JMH version: 1.37
+# VM version: JDK 21, Java HotSpot(TM) 64-Bit Server VM, 21+35-LTS-2513
+# VM invoker: C:\Program Files\Java\jdk-21\bin\java.exe
+# VM options: -Dfile.encoding=windows-1251 -Duser.country -Duser.language=en -Duser.variant
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 3 iterations, 10 s each
+# Measurement: 10 iterations, 10 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: org.example.jmh.SimpleBenchmark.stressTestRabbitConfigProducerLatency
+
+# Run progress: 96.30% complete, ETA 00:02:12
+# Fork: 1 of 1
+# Warmup Iteration   1: 0.251 ms/op
+# Warmup Iteration   2: 0.265 ms/op
+# Warmup Iteration   3: 0.213 ms/op
+Iteration   1: 0.215 ms/op
+Iteration   2: 0.220 ms/op
+Iteration   3: 0.523 ms/op
+Iteration   4: 0.368 ms/op
+Iteration   5: 0.237 ms/op
+Iteration   6: 0.236 ms/op
+Iteration   7: 0.501 ms/op
+Iteration   8: 0.236 ms/op
+Iteration   9: 0.226 ms/op
+Iteration  10: 0.247 ms/op
+
+
+Result "org.example.jmh.SimpleBenchmark.stressTestRabbitConfigProducerLatency":
+  0.301 ±(99.9%) 0.181 ms/op [Average]
+  (min, avg, max) = (0.215, 0.301, 0.523), stdev = 0.120
+  CI (99.9%): [0.120, 0.482] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:59:37
 
 REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
 why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
@@ -136,4 +941,31 @@ works, and factor in a small probability of new VM bugs. Additionally, while com
 different JVMs are already problematic, the performance difference caused by different Blackhole
 modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
 
-Benchmark  Mode  Cnt  Score   Error  Units
+Benchmark                                                                      Mode  Cnt          Score           Error  Units
+SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigThroughput        thrpt   10  442686670.211 ± 239916211.956  ops/s
+SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigThroughput       thrpt   10        331.613 ±       133.540  ops/s
+SimpleBenchmark.loadBalancingKafkaConfigThroughput                            thrpt   10  645198251.040 ±  43002631.315  ops/s
+SimpleBenchmark.loadBalancingRabbitConfigThroughput                           thrpt   10        880.017 ±        88.850  ops/s
+SimpleBenchmark.multipleConsumersRabbitConfigThroughput                       thrpt   10        330.622 ±       165.884  ops/s
+SimpleBenchmark.multipleConsumersStressTestRabbitConfigThroughput             thrpt   10  679596104.519 ± 221422959.935  ops/s
+SimpleBenchmark.simpleRabbitThroughput                                        thrpt   10       1158.032 ±       101.543  ops/s
+SimpleBenchmark.stressTestKafkaConfigThroughput                               thrpt   10  748219669.047 ±   7103526.042  ops/s
+SimpleBenchmark.stressTestRabbitConfigThroughput                              thrpt   10        146.261 ±         7.152  ops/s
+SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigConsumerLatency    avgt   10         ? 10??                  ms/op
+SimpleBenchmark.loadBalancingAndMultipleConsumersKafkaConfigProducerLatency    avgt   10         ? 10??                  ms/op
+SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigConsumerLatency   avgt   10          1.901 ±         0.510  ms/op
+SimpleBenchmark.loadBalancingAndMultipleConsumersRabbitConfigProducerLatency   avgt   10          0.066 ±         0.021  ms/op
+SimpleBenchmark.loadBalancingKafkaConfigConsumerLatency                        avgt   10         ? 10??                  ms/op
+SimpleBenchmark.loadBalancingKafkaConfigProducerLatency                        avgt   10         ? 10??                  ms/op
+SimpleBenchmark.loadBalancingRabbitConfigConsumerLatency                       avgt   10          0.603 ±         0.008  ms/op
+SimpleBenchmark.loadBalancingRabbitConfigProducerLatency                       avgt   10          0.063 ±         0.006  ms/op
+SimpleBenchmark.multipleConsumersRabbitConfigConsumerLatency                   avgt   10          1.840 ±         0.059  ms/op
+SimpleBenchmark.multipleConsumersRabbitConfigProducerLatency                   avgt   10          0.028 ±         0.024  ms/op
+SimpleBenchmark.multipleConsumersStressTestRabbitConfigConsumerLatency         avgt   10         ? 10??                  ms/op
+SimpleBenchmark.multipleConsumersStressTestRabbitConfigProducerLatency         avgt   10         ? 10??                  ms/op
+SimpleBenchmark.simpleRabbitConsumerLatency                                    avgt   10          0.598 ±         0.008  ms/op
+SimpleBenchmark.simpleRabbitProducerLatency                                    avgt   10          0.022 ±         0.006  ms/op
+SimpleBenchmark.stressTestKafkaConfigConsumerLatency                           avgt   10         ? 10??                  ms/op
+SimpleBenchmark.stressTestKafkaConfigProducerLatency                           avgt   10         ? 10??                  ms/op
+SimpleBenchmark.stressTestRabbitConfigConsumerLatency                          avgt   10          6.340 ±         1.103  ms/op
+SimpleBenchmark.stressTestRabbitConfigProducerLatency                          avgt   10          0.301 ±         0.181  ms/op

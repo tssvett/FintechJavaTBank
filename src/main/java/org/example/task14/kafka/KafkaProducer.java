@@ -19,6 +19,8 @@ public class KafkaProducer implements QueueProducer {
 
     @Override
     public void stopProducer() {
+        kafkaTemplate.getProducerFactory().getListeners().forEach(kafkaTemplate.getProducerFactory()::removeListener);
+        kafkaTemplate.destroy();
         log.info("Stop producer");
     }
 }
