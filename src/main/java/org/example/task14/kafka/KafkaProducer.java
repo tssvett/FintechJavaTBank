@@ -7,7 +7,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class KafkaProducer implements QueueProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
