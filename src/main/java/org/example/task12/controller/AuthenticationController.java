@@ -7,6 +7,7 @@ import org.example.task12.dto.AuthenticationResponse;
 import org.example.task12.dto.ChangePasswordRequest;
 import org.example.task12.dto.RegistrationRequest;
 import org.example.task12.security.service.AuthenticationService;
+import org.example.task15.metrics.CustomMetricService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
+    private final CustomMetricService customMetricService;
     private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
 
@@ -31,6 +33,7 @@ public class AuthenticationController {
 
         try (var ignored = MDC.putCloseable("Username", request.username())) {
             log.info("Request started");
+            customMetricService.incrementRequestCount();
             AuthenticationResponse register = authenticationService.register(request);
             log.info("Request finished");
             return register;

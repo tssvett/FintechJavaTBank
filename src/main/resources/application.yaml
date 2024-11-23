@@ -60,3 +60,17 @@ security:
     jwt-key: ${JWT_KEY:mySuperSecureJWTSecretKey1234567890TOPSECRETSECRET}
     default-expiration: 600 # 10 minutes in seconds
     remember-me-expiration: 2592000 # 30 days in seconds
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+        "[custom_counter]" : true

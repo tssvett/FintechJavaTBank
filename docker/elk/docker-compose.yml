@@ -24,7 +24,7 @@ services:
       - LS_JAVA_OPTS=-Xmx256m
       - XPACK_MONITORING_ENABLED=true
     volumes:
-      - .././logback:/var/log/logstash
+      - ../.././logback:/var/log/logstash
       - ./logstash/config/logstash.conf:/etc/logstash/conf.d/logstash.conf
     command: >
       sh -c "until curl -s http://elasticsearch:9200; do echo 'Waiting for Elasticsearch...'; sleep 5; done && logstash -f /etc/logstash/conf.d/logstash.conf"
