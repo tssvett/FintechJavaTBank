@@ -109,6 +109,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
     implementation("org.springframework.kafka:spring-kafka:3.2.4")
 
+    // https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
+    implementation("net.logstash.logback:logstash-logback-encoder:8.0")
+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+    implementation("org.springframework.boot:spring-boot-starter-actuator:3.4.0")
+
+    // https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus
+    implementation("io.micrometer:micrometer-registry-prometheus:1.14.1")
 
 }
 

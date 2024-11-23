@@ -1,0 +1,52 @@
+version: '3.8'  # Specify the version of Docker Compose
+
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - elk-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  logstash:
+    image: logstash:latest
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m
+      - XPACK_MONITORING_ENABLED=true
+    volumes:
+      - ../.././logback:/var/log/logstash
+      - ./logstash/config/logstash.conf:/etc/logstash/conf.d/logstash.conf
+    command: >
+      sh -c "until curl -s http://elasticsearch:9200; do echo 'Waiting for Elasticsearch...'; sleep 5; done && logstash -f /etc/logstash/conf.d/logstash.conf"
+    networks:
+      - elk-network
+    ports:
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: kibana:latest
+    ports:
+      - "5601:5601"
+    networks:
+      - elk-network
+    depends_on:
+      - elasticsearch
+
+volumes:
+  esdata:
+
+networks:
+  elk-network:
+    driver: bridge

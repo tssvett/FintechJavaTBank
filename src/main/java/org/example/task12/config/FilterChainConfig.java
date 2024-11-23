@@ -39,7 +39,8 @@ public class FilterChainConfig {
                         matcherRegistry
                                 .requestMatchers(
                                         "/api/v1/auth/authenticate",
-                                        "/api/v1/auth/register").permitAll()
+                                        "/api/v1/auth/register",
+                                        "/actuator/**").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(sessionManagementConfigurer ->
                         sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
